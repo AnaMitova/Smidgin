@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+  <script>
+// Self-executing function to avoid polluting global scope
+(function() {
+    // Wait for the DOM to be fully loaded before running script
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- Interactive Bottle Story ---
+        const capHotspot = document.getElementById('hotspot-cap');
+        const glassHotspot = document.getElementById('hotspot-glass');
+        const labelHotspot = document.getElementById('hotspot-label');
+        const bottomGlassHotspot = document.getElementById('hotspot-bottom-glass'); // New hotspot
+        
+        // Target the headline div
+        const storyText = document.getElementById('bottle-headline');
+        
+        // Get the bottle image itself
+        const bottleImage = document.getElementById('bottle-image');
+        
+        // Check if the storyText element exists before proceeding
+        if (storyText && bottleImage) {
+            // Store the default HTML
+            const defaultStoryHTML = storyText.innerHTML; 
+
+            // Define the stories as HTML strings (formatted to fit the space)
+            const stories = {
+                cap: `<img src="sliki/logo.png" alt="Hand-Dipped Wax Seal" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
+                      <p class="text-red-500 md:text-4xl text-2xl">HAND-DIPPED WAX SEAL</p>
+                      <p class="font-montserrat md:text-lg text-sm pt-2">Hand-applied wax seal,carefully curved for easy opening.Each seal is beautifully embossed with the iconic Macedonian lion,symbolyzing the rich history of the centuries-old heritage of the region</p>`,
+                glass: `<img src="sliki/logo.png" alt="The Bottle Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
+                        <p class="text-red-500 md:text-4xl text-2xl">THE BOTTLE</p>
+                        <p class="font-montserrat md:text-lg text-sm pt-2">The timeless design of our flavor bottle is inspired by the elegant and sophisticated gold mask from roman times discovered in the picturesque Ohrid region,exuding reinfimenet and class in every detail.</p>`,
+                label: `<img src="sliki/logo.png" alt="Our Label Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
+                        <p class="text-red-500 md:text-4xl text-2xl">OUR LABEL</p>
+                        <p class="font-montserrat md:text-lg text-sm pt-2">Experience the epitome of refinement and class with our award-winning design label.Each bottle is carefully hand-applied with precision and an eye for detail,elevating any space with timeless elegance and sophistication.</p>`
+            };
+
+            // Function to change text and add hover effect
+            function showStory(html) {
+                // Ensure the container class is maintained while updating content
+                storyText.className = "flex md:text-5xl text-[26px] flex-col md:space-y-4 md:min-h-[300px]"; 
+                storyText.innerHTML = html;
+                bottleImage.classList.add('bottle-glow');
+            }
+
+            // Function to reset text and remove hover effect
+            function resetStory() {
+                storyText.innerHTML = defaultStoryHTML;
+                // Reapply the necessary classes for the default view
+                storyText.className = "flex md:text-5xl text-[26px] flex-col md:space-y-4 md:min-h-[300px]"; 
+                bottleImage.classList.remove('bottle-glow');
+            }
+
+            // Add event listeners for all hotspots
+            if (capHotspot) {
+                capHotspot.addEventListener('mouseenter', () => showStory(stories.cap));
+                capHotspot.addEventListener('mouseleave', () => resetStory());
+            }
+            
+            if (glassHotspot) {
+                glassHotspot.addEventListener('mouseenter', () => showStory(stories.glass));
+                glassHotspot.addEventListener('mouseleave', () => resetStory());
+            }
+
+            if (labelHotspot) {
+                labelHotspot.addEventListener('mouseenter', () => showStory(stories.label));
+                labelHotspot.addEventListener('mouseleave', () => resetStory());
+            }
+            
+            // Add listeners for the new bottom glass hotspot
+            if (bottomGlassHotspot) {
+                bottomGlassHotspot.addEventListener('mouseenter', () => showStory(stories.glass));
+                bottomGlassHotspot.addEventListener('mouseleave', () => resetStory());
+            }
+
+        } else {
+            console.error("Bottle headline ('bottle-headline') or image ('bottle-image') not found.");
+        }
+    });
+})();
+</script>
+</body>
+</html>

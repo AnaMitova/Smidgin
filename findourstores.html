@@ -1,0 +1,562 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="./output.css" rel="stylesheet" type="text/css"/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Baskervville:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Edu+VIC+WA+NT+Hand+Pre:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital@1&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/0a30fb337a40fc83c501c5604f38dfb6?family=Centra+No2+TRIAL" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/chronicle-display" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e70ea989f6.js" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+<script id="buyAndTaste">
+let currentCity = null; // Will be set when a city is selected
+
+function switchTab(tab) {
+  const buy = document.getElementById("buy");
+  const taste = document.getElementById("taste");
+  const indicator = document.getElementById("indicator");
+  const buyBtn = document.getElementById("buy-btn");
+  const tasteBtn = document.getElementById("taste-btn");
+  const title = document.getElementById('page-title');
+
+  if (!currentCity) return; // no city selected yet
+
+  const isSmallScreen = window.innerWidth < 640; // Tailwind's sm breakpoint
+
+  // Hide both containers
+  [buy, taste].forEach(container => {
+    container.classList.add("hidden"); 
+    container.classList.remove("opacity-0", "-translate-y-10"); 
+  });
+
+  // Reset button colors
+  buyBtn.classList.remove("text-red-500");
+  buyBtn.classList.add("text-gray-500");
+  tasteBtn.classList.remove("text-red-500");
+  tasteBtn.classList.add("text-gray-500");
+
+  let activeContainer;
+  const translateValue = isSmallScreen ? "translateX(93px)" : "translateX(139px)";
+
+  if (tab === "buy") {
+    activeContainer = buy;
+    indicator.style.transform = "translateX(0px)";
+    buyBtn.classList.remove("text-gray-500");
+    buyBtn.classList.add("text-red-500");
+    title.textContent = `Buy Smidgin in ${currentCity}, Macedonia`;
+  } else {
+    activeContainer = taste;
+    indicator.style.transform = translateValue;
+    tasteBtn.classList.remove("text-gray-500");
+    tasteBtn.classList.add("text-red-500");
+    title.textContent = `Taste Smidgin in ${currentCity}, Macedonia`;
+  }
+
+  // Prepare animation start state
+  activeContainer.classList.remove("hidden");
+  activeContainer.classList.add("opacity-0", "-translate-y-10", "transition-all", "duration-700");
+
+  // Force browser to register the start state before animating
+  requestAnimationFrame(() => {
+    activeContainer.classList.remove("opacity-0", "-translate-y-10");
+  });
+}
+
+// Update currentCity whenever a city is selected
+function setCurrentCity(city) {
+  currentCity = city;
+  // Show buy cards by default for the selected city
+  switchTab("buy");
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+<script id="DodavanjeCards">
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmOEF5LnYRFHQsV5O7MQ7tmY70C-hlvqfY5_LmKIBOgF3_czRWJwUCG7GwYBLyFLevdtowrxiTaSht/pub?output=csv";
+let cityData = {};
+
+async function loadData() {
+  console.log("🔄 Fetching Google Sheet...");
+  const res = await fetch(SHEET_URL);
+  const text = await res.text();
+
+  // Parse CSV with PapaParse
+  const parsed = Papa.parse(text, { header: true });
+  const rows = parsed.data.filter(r => r.city && r.type);
+
+  console.log("📄 Raw rows:", rows);
+
+rows.forEach(rawRow => {
+  // Normalize all keys (trim + lowercase)
+  const row = {};
+  Object.keys(rawRow).forEach(k => {
+    row[k.trim().toLowerCase()] = rawRow[k];
+  });
+
+  const city = row.city?.trim();
+  const type = row.type?.trim().toLowerCase();
+
+  if (!city || !type) return;
+
+  if (!cityData[city]) cityData[city] = { buy: [], taste: [] };
+
+  cityData[city][type].push({
+    name: row.name || '',
+    address: row.address || '',
+    hours: row.hours || '',
+    phone: row.phone || '',
+    image: row.image || '',
+    link: row.link || '#'
+  });
+});
+
+
+  console.log("✅ Parsed cityData:", cityData);
+}
+
+function updateCards(sectionId, data) {
+  const container = document.getElementById(sectionId);
+  container.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    container.innerHTML = '<p class="text-gray-500">No data found</p>';
+    return;
+  }
+
+  data.forEach(item => {
+    const card = `
+      <div class="flex flex-col  items-center justify-center shadow-2xl rounded-xl h-[300px] w-[210px] md:h-[524px] md:w-[330px] p-3 md:p-[28px] font-montserrat bg-white">
+        <div class="w-[180px] h-[150px] md:w-[274px] md:h-[240px]">
+          <img src="${item.image}" class="rounded-xl w-full h-full object-cover"/>
+        </div>
+        <div class="flex flex-col w-full">
+          <div class="flex justify-between pt-4 md:pt-7 items-start">
+            <a href="${item.link}" target="_blank" class="font-bold underline text-[11px] md:text-[15px] md:text-xl leading-tight">${item.name}</a>
+          </div>
+          <div class="space-y-2 md:space-y-4 pt-3 md:pt-4 pb-3 md:pb-7 text-[10px] md:text-[px] text-gray-500 leading-snug">
+            <div class="flex items-start space-x-1">
+              <i class="fa-solid fa-location-dot text-[12px] md:text-base"></i>
+              <p class="text-[11px] md:text-[15px]">  ${item.address}</p>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fa-solid fa-clock text-[12px] md:text-base"></i>
+              <p class="text-[11px] md:text-[15px]">${item.hours}</p>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fa-solid fa-phone text-[12px] md:text-base"></i>
+              <p class="text-[11px] md:text-[15px]">${item.phone}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    container.innerHTML += card;
+  });
+}
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadData();
+
+  // Attach click listeners for dropdown cities
+  document.querySelectorAll('[data-city]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const city = e.target.getAttribute('data-city');
+      setCurrentCity(city);
+      console.log("🟢 Clicked city:", city, cityData[city]);
+
+      updateCards('buy', cityData[city]?.buy || []);
+      updateCards('taste', cityData[city]?.taste || []);
+    });
+  });
+
+  // ✅ Automatically load Skopje's "Buy" info on page open
+  const defaultCity = "Skopje";
+  setCurrentCity(defaultCity);
+  updateCards('buy', cityData[defaultCity]?.buy || []);
+  updateCards('taste', cityData[defaultCity]?.taste || []);
+});
+
+
+</script>
+
+
+
+<script>
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden')
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden')
+        }
+</script>
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .active-btn {
+            @apply bg-[#FEF2F1] text-red-500 border-red-500;
+            }
+    </style>
+</head>
+<body>
+
+
+<!-- Homepage Section -->
+<div id="homepage" class="font-montserrat md:px-28 pt-14  space-y-16 flex flex-col items-center">
+    <div id="navbar" class="flex w-[99%] md:px-0 px-9 justify-between items-center">
+        <a href="./index.html" id="logo" class="md:w-[208px] w-[180px]">
+            <img src="./img/logo.png"/>
+        </a>
+        <i onclick="openModal('ham-menu')" class="fa-solid cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars"></i>
+        <div id="navs" class="hidden md:flex space-x-11 text-base items-center">
+            <a href="./whoweare.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">WHO WE ARE</a>
+            <a href="./ourgin.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">OUR GIN</a>
+            <a href="./whatweoffer.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">WHAT WE OFFER</a>
+            <a href="findourstores.html" class="border-b-[2.7px] border-b-red-500 text-red-500 font-semibold  pb-[1.7px]">FIND OUR STORES</a>
+            <a class="px-3 py-3 bg-red-500  shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">BUY ONLINE</a>
+        </div>
+    </div> 
+</div>
+<div id="ham-menu" class="fixed inset-0 bg-[#EF4135] z-50 hidden flex flex-col  pt-12 items-start justify-start space-y-0">
+    <i onclick="closeModal('ham-menu')" class="fa-solid fa-xmark text-white text-3xl absolute top-6 right-6 cursor-pointer"></i>
+    <div class="flex pl-9 pb-10 w-full justify-start" >
+      <img class="h-[42px]" src="./img/image.png"/>
+    </div>
+    <div class="flex flex-col w-full pl-9 space-y-3 justify-start">
+      <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">BUY ONLINE</a>
+      <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">WHO WE ARE</a>
+    <a href="./ourgin.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">OUR GIN</a>
+    <a href="./whatweoffer.html" class="text-black underline hover:text-white  font-medium font-montserrat text-2xl">WHAT WE OFFER</a>
+    <a href="findourstores.html" class="text-black underline hover:text-white font-medium font-montserrat text-2xl">FIND OUR STORES</a>
+    </div>
+<div id="slideshow" class="">
+
+    <div id="DiscoverOurGin" class="overflow-x-auto -mt-3">
+        <div class="flex flex-nowrap pb-12  pl-4 space-x-0">
+            
+            <a href="./classic.html">
+            <div class="relative group flex-col flex items-center mt-9 flex-shrink-0 w-[40%] ">
+                <img src="icons/classic.png" class="h-[234px] self-center"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex flex-col w-full items-center">
+                        <p class="text-7xl text-[#4D2957] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-8xl text-[#4D2957] mr-[-150px] font-Velvet pointer-events-auto">Velvet</p>
+                    </div>
+                    <a href="./velvet.html" class="mt-8 py-3 bg-[#4D2957] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-9 text-black text-[20px] underline font-montserrat text-center">CLASSIC</div>
+            </div>
+             </a>
+
+            <a href="./velvet.html">
+            <div class="relative group flex-shrink-0 w-[40%] snap-start">
+                <img src="icons/velvet.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex flex-col w-full items-center">
+                        <p class="text-7xl text-[#4D2957] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-8xl text-[#4D2957] mr-[-150px] font-Velvet pointer-events-auto">Velvet</p>
+                    </div>
+                    <a href="./velvet.html" class="mt-8 py-3 bg-[#4D2957] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">VELVET</div>
+            </div>
+             </a>
+             
+            <a href="./orient.html">
+            <div class="relative group flex-shrink-0 w-[40%] snap-start">
+                <img src="icons/orient.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex -ml-7 flex-col w-full items-center">
+                        <p class="text-7xl text-[#821A16] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-7xl text-[#821A16] mr-[-150px] font-Papyrus pointer-events-auto">Orient</p>
+                    </div>
+                    <a href="./orient.html" class="mt-8 px-5 py-3 bg-[#821A16] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">ORIENT</div>
+            </div>
+             </a>
+             
+             <a href="./light.html">
+            <div class="relative group flex-shrink-0 w-[40%] snap-start">
+                <img src="icons/light.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex -ml-7 flex-col w-full items-center">
+                        <p class="text-7xl text-[#4164AD] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-7xl text-[#4164AD] mr-[-150px] font-montserrat pointer-events-auto">LIGHT</p>
+                    </div>
+                    <a href="./light.html" class="mt-8 px-5 py-3 bg-[#4164AD] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">LIGHT</div>
+            </div>
+             </a>
+
+            <a href="./xo.html">
+            <div class="relative group  flex-shrink-0 w-[40%]  snap-start">
+                <img src="./icons/xo.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex flex-col w-full items-center">
+                        <p class="text-7xl text-[#A24B1E] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-7xl text-[#A24B1E] mr-[-150px] font-Baskervville pointer-events-auto">XO</p>
+                    </div>
+                    <a href="./xo.html" class="mt-8 px-5 py-3 bg-[#A24B1E] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">XO</div>
+            </div>
+             </a>
+        </div>
+    </div>
+</div>
+    
+
+
+</div>
+<script>
+  // Open the modal
+  function openModal(id) {
+    document.getElementById(id).classList.remove("hidden");
+  }
+
+  // Close the modal
+  function closeModal(id) {
+    document.getElementById(id).classList.add("hidden");
+  }
+
+  // // Close when clicking outside the white box
+  // document.getElementById("fig-sour").addEventListener("click", function () {
+  //   closeModal("fig-sour");
+  // });
+</script>
+
+<div id="world-btn" class="fixed inset-0 hidden flex items-center justify-center z-50 p-4">
+  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-14 w-full max-w-lg md:max-w-[945px] max-h-[85vh] md:h-[600px] relative flex flex-col justify-start items-start overflow-y-auto">
+    
+    <button class="absolute top-2 right-2 text-gray-500 text-2xl font-bold" onclick="closeModal('world-btn')">✕</button>
+    
+    <h2 class="text-2xl md:text-[32px] w-full text-left font-montserrat pb-8 md:pb-14 pt-4 md:pt-0">Select a Location</h2>
+    
+    <div id="Continents" class="flex flex-col space-y-8 md:space-y-12 w-full">
+        
+        <div id="NorthAmerica" class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 font-montserrat items-start md:items-center">
+            <p class="text-lg md:text-[20px] font-semibold flex-shrink-0 w-auto md:w-[150px]">North America</p>
+            <div class="flex flex-wrap gap-3">
+                <div class="w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer border-black bg-white justify-center items-center space-x-2">
+                    <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/usa.png"/>
+                    <a class="text-base md:text-[20px]">United States</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="Europe" class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-0 font-montserrat items-start md:items-center">
+            <p class="text-lg md:text-[20px] font-semibold flex-shrink-0 w-auto md:w-[150px]">Europe</p>
+            <div class="flex flex-col space-y-3 w-full">
+                <div class="flex flex-wrap gap-3">
+                    <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                        <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/serbia.png"/>
+                        <a class="text-base md:text-[20px]">Serbia</a>
+                    </div>
+                    <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                        <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/montenegro.png"/>
+                        <a class="text-base md:text-[20px]">Montenegro</a>
+                    </div>
+                    <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                        <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/slo.png"/>
+                        <a class="text-base md:text-[20px]">Slovenia</a>
+                    </div>
+                    <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                        <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/italy.png"/>
+                        <a class="text-base md:text-[20px]">Italy</a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                        <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/germany.png"/>
+                        <a class="text-base md:text-[20px]">Germany</a>
+                    </div>
+                    <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                        <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/swit.png"/>
+                        <a class="text-base md:text-[20px]">Switzerland</a>
+                    </div>
+                    <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                        <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/malta.png"/>
+                        <a class="text-base md:text-[20px]">Malta</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <div id="Asia" class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-11 font-montserrat items-start md:items-center">
+            <p class="text-lg md:text-[20px] font-semibold flex-shrink-0 w-auto md:w-[150px]">Asia,<br class="md:hidden"/> Middle East</p> 
+            <div class="flex flex-wrap gap-3">
+                <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                    <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/dubai.png"/>
+                    <a class="text-base md:text-[20px]">UAE, Dubai</a>
+                </div>
+                <div class="hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border border-black bg-white justify-center items-center space-x-2">
+                    <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/australia.png"/>
+                    <a class="text-base md:text-[20px]">Australia</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main class="md:px-32 md:pt-20 pt-6 mb-20">
+    <div class="text-center md:mb-8 mb-12">        
+        <br/>
+        <h2 class=" justify-center text-3xl flex md:flex-row flex-col sm:text-4xl md:text-5xl font-Baskervville font-thin  text-black mb-4 sm:mb-6">FIND OUR STORES <span class="text-red-500 md:pl-3"> WORLDWIDE</span></h2><br/>
+        <p class="text-black hidden md:block font-montserrat w-2/3 mx-auto mb-6 sm:mb-8 text-sm sm:text-base px-4">Smidgin is available in select boutiques, bars, and retailers around the world. Explore our global map to discover where you can sip, shop, and experience the spirit of Smidgin.</p>
+        <div class="flex flex-row justify-center items-center space-x-5">
+            <div class="relative inline-block text-left">
+                <button id="dropdownToggle" aria-haspopup="true" aria-expanded="false" aria-controls="dropdownMenu" class="font-montserrat px-5 py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white hover:text-exam-blue duration-150 flex items-center justify-between text-[14px] md:w-40">
+                    <span>MACEDONIA</span>
+                    <i id="dropdownArrow" class="fa-solid fa-chevron-down ml-2 text-xs transition-all duration-300"></i>
+                </button>
+                
+            <div id="dropdownMenu" role="menu" aria-labelledby="dropdownToggle" class="absolute font-montserrat flex flex-col items-center justify-start space-y-2 left-0 mt-2 w-40 rounded-lg bg-white shadow-xl z-50 ring-1 ring-black ring-opacity-5 opacity-0 scale-95 pointer-events-none transition-all duration-300 ease-out max-h-52 overflow-y-auto">
+                <a href="#" data-city="Skopje" onclick="setCurrentCity('Skopje')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Skopje</a>
+                <a href="#" data-city="Bitola" onclick="setCurrentCity('Bitola')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Bitola</a>
+                <a href="#" data-city="Ohrid" onclick="setCurrentCity('Ohrid')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Ohrid</a>
+                <a href="#" data-city="Kumanovo" onclick="setCurrentCity('Kumanovo')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Kumanovo</a>
+                <a href="#" data-city="Shtip" onclick="setCurrentCity('Shtip')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Shtip</a>
+                <a href="#" data-city="Prilep" onclick="setCurrentCity('Prilep')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Prilep</a>
+                <a href="#" data-city="Strumica" onclick="setCurrentCity('Strumica')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Strumica</a>
+                <a href="#" data-city="Struga" onclick="setCurrentCity('Struga')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Struga</a>
+                <a href="#" data-city="Veles" onclick="setCurrentCity('Veles')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Veles</a>
+                <a href="#" data-city="Berovo" onclick="setCurrentCity('Berovo')" role="menuitem" class="text-red-500 text-center w-full hover:bg-red-50 block px-4 py-3 text-sm hover:text-[#1977cc]">Berovo</a>
+            </div>
+
+            </div>
+            
+            <script>
+            document.addEventListener('DOMContentLoaded', () => {
+             const toggle = document.getElementById('dropdownToggle');
+             const menu = document.getElementById('dropdownMenu');
+             const arrow = document.getElementById('dropdownArrow');
+           
+             function openMenu() {
+               menu.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+               menu.classList.add('opacity-100', 'scale-100');
+               toggle.setAttribute('aria-expanded', 'true');
+               arrow.className = "fa-solid fa-chevron-up ml-2 text-xs"; // change icon to up
+             }
+           
+             function closeMenu() {
+               menu.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+               menu.classList.remove('opacity-100', 'scale-100');
+               toggle.setAttribute('aria-expanded', 'false');
+               arrow.className = "fa-solid fa-chevron-down ml-2 text-xs"; // change icon back to down
+             }
+           
+             function toggleMenu(e) {
+               e.stopPropagation();
+               if (menu.classList.contains('opacity-0')) {
+                 openMenu();
+               } else {
+                 closeMenu();
+               }
+             }
+           
+             toggle.addEventListener('click', toggleMenu);
+           
+             document.addEventListener('click', (e) => {
+               if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                 closeMenu();
+               }
+             });
+           
+             document.addEventListener('keydown', (e) => {
+               if (e.key === 'Escape') closeMenu();
+             });
+           
+             window.addEventListener('resize', closeMenu);
+           });
+            </script>
+            
+
+            <button onclick="openModal('world-btn')" id="world" class=" px-8 font-montserrat sm:w-auto border border-white py-3 rounded-xl shadow-2xl hover:border-red-500 hover:bg-red-50 duration-300 transition-colors flex items-center justify-center space-x-2"><span>WORLD</span> <i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
+    <br/>
+    
+    <div class="flex flex-row justify-between items-center mb-6 sm:mb-8 space-y-4 sm:space-y-0">
+        <h3 id="page-title" class="w-1/2 md:text-2xl sm:text-2xl font-montserrat font-semibold text-black text-start md:pl-0 pl-7 md:text-center sm:text-left">Buy Smidgin in Skopje, Macedonia</h3>
+        <div class="relative flex md:right-0 right-8 bg-[#FEF2F1] rounded-md h-[48px] w-[180px] md:w-[280px]">
+            <span id="indicator" class="shadow-[0_6px_12px_rgba(239,68,68,0.6)] absolute top-1 left-1 w-[80px] md:w-[126px] h-[40px] rounded-md bg-[#FEF2F1] transition-transform duration-300"></span>
+            <button id="buy-btn" onclick="switchTab('buy')" class="relative z-10  px-[32px] py-[12px]    text-[12px] md:text-[18px] flex-1 text-center text-red-500 font-montserrat"> BUY </button>
+            <button id="taste-btn" onclick="switchTab('taste')" class="relative z-10 px-[32px] py-[12px] text-[12px] md:text-[18px] flex-1 text-center text-gray-500 font-montserrat"> TASTE </button>
+        </div>
+    </div>
+        
+<div id="buy" class="transition-all duration-700 flex justify-center flex-wrap md:gap-x-7 gap-x-4 gap-y-8">
+</div>
+
+<div id="taste" class="hidden -translate-y-10 pointer-events-none transition-all duration-700 flex justify-center flex-wrap gap-x-4 md:gap-x-7 gap-y-8">
+</div>
+
+
+
+</main>
+    <!-- Footer -->
+<div class="hidden md:flex px-32 items-end justify-between pt-32">
+   <div class="w-1/3">
+       <img src="./img/logoFooter.png" class="w-[241px]"/>
+       <p class="font-montserrat pt-7">Skenderoski and Lowther DOO Skopje</p>
+       <p class="font-montserrat pt-2"><i class="fa-solid fa-location-dot"></i>   Boulevard Ilinden 80, Skopje, Macedonia</p>
+       <p class="font-montserrat pt-2"><i class="fa-solid fa-phone"></i>  +389 76 405 175</p>
+   </div>
+   <div class="font-montserrat underline text-center w-1/3">
+       <a href="./returnoffer.html">Bottle Return Offer</a><br/>
+       <a href="./privacypolicy.html">Privacy Policy</a><br/>
+       <a href="./termsandconditions.html">Terms and Conditions</a>
+   </div>
+   <div class="w-1/3 flex justify-end">
+       <img src="./img/Screenshot 2025-09-02 at 01.06.11.png" class="w-[60%]"/>
+   </div>
+</div>
+
+<div class="md:hidden flex flex-col justify-center items-center">
+    <img src="./img/logoFooter.png" class="w-1/3"/>
+    <img src="./img/Screenshot 2025-10-31 at 00.17.38.png" class="w-1/3 mt-2"/>
+    <a class="underline text-gray-500 font-montserrat text-[14px] mt-5" href="./returnoffer.html">Bottle Return Offer</a><br/>
+    <a class="underline text-gray-500 font-montserrat text-[14px] -mt-5" href="./privacypolicy.html">Privacy Policy</a><br/>
+    <a class="underline text-gray-500 font-montserrat text-[14px] -mt-5" href="./termsandconditions.html">Terms and Conditions</a>
+</div>
+
+<div class=" md:hidden flex justify-between pr-7">
+    <div>
+        <p class="pl-7 text-gray-500 text-[14px] font-montserrat pt-7">Skenderoski and Lowther DOO Skopje</p>
+        <p class="pl-7 text-gray-500 text-[14px] font-montserrat pt-2"><i class="fa-solid fa-location-dot"></i>   Boulevard Ilinden 80, Skopje, Macedonia</p>
+        <p class="pl-7 text-gray-500 text-[14px] font-montserrat pt-2"><i class="fa-solid fa-phone"></i>  +389 76 405 175</p>
+    </div>
+    <div>
+      <img class="w-16" src="./img/Screenshot 2025-10-31 at 00.21.54.png"/>
+    </div>
+</div>
+     <br/>
+     <br/>
+<script src="main.js"></script>
+</body>
+</html>

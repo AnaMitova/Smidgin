@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMIDGIN - Interactive Ingredients</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Custom size for the icons */
+    .w-18 { width: 4.5rem; /* 72px */ } 
+    .h-18 { height: 4.5rem; /* 72px */ }
+    /* Custom negative margin to visually center the full component */
+    .ml-[-80px] { margin-left: -80px; } 
+
+    .ingredient-icon {
+      filter: brightness(0);
+      transition: all 0.3s ease;
+    }
+    .ingredient-icon:hover {
+      /* Red filter on hover/active */
+      filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(3500%) hue-rotate(350deg) brightness(95%) contrast(95%);
+      transform: scale(1.2);
+    }
+    .ingredient-icon.active {
+      /* Red filter on hover/active */
+      filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(3500%) hue-rotate(350deg) brightness(95%) contrast(95%);
+      transform: scale(1.2);
+    }
+    /* Updated red filter for ingredient display image in the description panel */
+    .ingredient-image-display {
+      filter: brightness(0) sepia(100%) hue-rotate(-30deg) saturate(200%);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-neutral-50"> 
+  
+  <div class="min-h-screen flex items-center justify-center p-8">
+    <div class="flex items-center gap-0 mx-auto"> 
+      
+      <div class="relative w-[700px] h-[700px] flex-shrink-0 ml-[-80px]"> 
+        
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+          <img 
+            src="./icons/Screenshot 2025-11-09 at 18.24.38.png" 
+            alt="SMIDGIN Logo" 
+            class="w-52 h-52 object-contain"/>
+        </div>
+
+      <div id="ingredients-container" class="absolute inset-0"></div>
+      </div>
+
+      <div class="w-[450px] h-[500px] rounded-xl p-10 flex-shrink-0">
+        <div id="description-panel" class="h-full font-Baskervville flex flex-col items-center justify-center text-center gap-6">
+          <div class="flex justify-center items-end space-x-3">
+              <p class="md:text-7xl text-[40px] text-red-500">14</p>
+              <p class="md:text-5xl text-[30px]">BOTANICALS</p>
+          </div>
+          <p class="md:text-5xl text-[30px] text-center">FOR A DISTINCT GIN</p>
+          <div class="flex items-center pt-5 space-x-4">
+              <i class="fa-solid fa-computer-mouse text-red-500"></i>
+              <p class="font-montserrat text-xs text-red-500">Hover over the icons to learn more about the botanicals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const ingredients = [
+        {
+          name: "DRY GRAPE",
+          description: "Ripe dry grape, specific sweet, fruity aroma",
+          image: "icons/icon14.png",
+          angle: 0
+        },
+        {
+          name: "LIME RIND",
+          description: "Fresh fragrant aromas, bright subtlety that ties everything together",
+          image: "icons/icon12.png",
+          angle: 25.7
+        },
+        {
+          name: "ALMOND",
+          description: "Almonds lend a delectable creaminess and rich structure in mouthfeel",
+          image: "icons/icon4.png",
+          angle: 51.4
+        },
+        {
+          name: "ORANGE PEEL",
+          description: "Sweet orange zest on the aroma and aftertaste",
+          image: "icons/icon3.png",
+          angle: 77.1
+        },
+        {
+          name: "MOUNTAIN TEA",
+          description: "Macedonian mountain tea, our stamp, soft, sweet floral aroma",
+          image: "icons/icon2.png",
+          angle: 102.8
+        },
+        {
+          name: "GRAPEFRUIT RIND",
+          description: "Bitter fresh grapefruit aroma, reaches in aftertaste",
+          image: "icons/icon7.png",
+          angle: 128.5
+        },
+        {
+          name: "LEMON RIND",
+          description: "Contribute fresh citrus note, crispness in the aroma",
+          image: "icons/icon11.png",
+          angle: 154.2
+        },
+        {
+          name: "GINGER",
+          description: "Sweet, peppery flavor with a delicate touch of warmth and freshness",
+          image: "icons/icon8.png",
+          angle: 179.9
+        },
+        {
+          name: "CORIANDER",
+          description: "Second most used botanical, spicy, nutty and slightly citrusy notes",
+          image: "icons/icon10.png",
+          angle: 205.6
+        },
+        {
+          name: "BLACK PEPPER",
+          description: "Piquant, spicy and warming",
+          image: "icons/icon6.png",
+          angle: 231.3
+        },
+        {
+          name: "WHOLE CLOVES",
+          description: "Woody spicy aroma and complexity on aroma and aftertaste",
+          image: "icons/icon13.png",
+          angle: 257
+        },
+        {
+          name: "CINNAMON BARK",
+          description: "Warm spicy notes, sweetness on taste and reaches on the aftertaste",
+          image: "icons/icon9.png",
+          angle: 282.7
+        },
+        {
+                name: "JUNIPER BERRIES",
+          description: "Juniper provides gin with its distinctive freshness, aromas as pine, resiny and hint",
+          image: "icons/icon1.png",
+          angle: 308.4
+        },
+        {
+          name: "gresno",
+          description: "Warm and nutty with sweet, spicy undertones that add depth and a cozy aromatic touch.",
+          image: "icons/icon5.png",
+          angle: 334.1
+        }
+      ];
+
+      const container = document.getElementById('ingredients-container');
+      const descriptionPanel = document.getElementById('description-panel');
+      const radius = 230; 
+
+      // Create ingredient icons
+      ingredients.forEach((ingredient, index) => {
+        const angleRad = (ingredient.angle * Math.PI) / 180;
+        const x = radius * Math.cos(angleRad) + 350; 
+        const y = radius * Math.sin(angleRad) + 350; 
+
+        const iconDiv = document.createElement('div');
+        iconDiv.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer';
+        iconDiv.style.left = x + 'px';
+        iconDiv.style.top = y + 'px';
+
+        const img = document.createElement('img');
+        img.src = ingredient.image;
+        img.alt = ingredient.name;
+        img.className = 'ingredient-icon w-18 h-18 object-contain'; 
+        
+        iconDiv.appendChild(img);
+        container.appendChild(iconDiv);
+
+        iconDiv.addEventListener('mouseenter', () => {
+          img.classList.add('active');
+          descriptionPanel.innerHTML = `
+            <div class="flex flex-col items-start justify-center h-full gap-6">
+              <img src="${ingredient.image}" alt="${ingredient.name}" class="w-28 h-28 text-red-500 object-contain ingredient-image-display"> 
+              <div class="text-left">
+                <h3 class="text-3xl font-bold text-red-500 mb-3">${ingredient.name}</h3>
+                <p class="text-neutral-700 text-red-500 text-lg leading-relaxed">${ingredient.description}</p>
+              </div>
+            </div>
+          `;
+        });
+
+        iconDiv.addEventListener('mouseleave', () => {
+          img.classList.remove('active');
+          descriptionPanel.innerHTML = `
+          <div class="flex justify-center items-end space-x-3">
+              <p class="md:text-7xl text-[40px] text-red-500">14</p>
+              <p class="md:text-5xl text-[30px]">BOTANICALS</p>
+          </div>
+          <p class="md:text-5xl text-[30px] text-center">FOR A DISTINCT GIN</p>
+          <div class="flex items-center pt-5 space-x-4">
+              <i class="fa-solid fa-computer-mouse text-red-500"></i>
+              <p class="font-montserrat text-xs text-red-500">Hover over the icons to learn more about the botanicals</p>
+          </div>
+          `;
+        });
+      });
+    </script>  
+  </div>
+</body>
+</html>
