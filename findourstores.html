@@ -48,7 +48,7 @@ function switchTab(tab) {
   tasteBtn.classList.add("text-gray-500");
 
   let activeContainer;
-  const translateValue = isSmallScreen ? "translateX(93px)" : "translateX(139px)";
+  const translateValue = isSmallScreen ? "translateX(72px)" : "translateX(139px)";
 
   if (tab === "buy") {
     activeContainer = buy;
@@ -138,7 +138,7 @@ function updateCards(sectionId, data) {
 
   data.forEach(item => {
     const card = `
-      <div class="flex flex-col  items-center justify-center shadow-2xl rounded-xl h-[300px] w-[190px] md:h-[524px] md:w-[330px] p-3 md:p-[28px] font-montserrat bg-white">
+      <div class="flex flex-col  items-center justify-center shadow-2xl rounded-xl h-[300px] w-[180px] md:h-[524px] md:w-[330px] p-3 md:p-[28px] font-montserrat bg-white">
         <div class="w-[160px] h-[130px] md:w-[274px] md:h-[240px]">
           <img src="${item.image}" class="rounded-xl w-full h-full object-cover"/>
         </div>
@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 
 <div id="world-btn" class="fixed inset-0 hidden flex items-center justify-center z-50 p-4">
-  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-14 w-full max-w-lg md:max-w-[945px] h-[600px] md:h-[600px] relative flex flex-col justify-start items-start overflow-y-auto">
+  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-14 w-full max-w-lg md:max-w-[945px] h-[650px] md:h-[600px] relative flex flex-col justify-start items-start overflow-y-auto">
     
     <button class="absolute top-2 right-2 text-gray-500 text-2xl font-bold" onclick="closeModal('world-btn')">✕</button>
     
@@ -503,10 +503,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     <div class="flex flex-row justify-between items-center mb-6 sm:mb-8 space-y-4 sm:space-y-0">
         <h3 id="page-title" class="w-1/2 md:text-2xl sm:text-2xl font-montserrat font-semibold text-black text-start md:pl-0 pl-7 md:text-center sm:text-left">Buy Smidgin in Skopje, Macedonia</h3>
-        <div class="relative flex md:right-0 right-8 bg-[#FEF2F1] rounded-md h-[48px] w-[180px] md:w-[280px]">
+        <div class="relative  flex md:right-0 right-8 bg-[#FEF2F1] rounded-md h-[48px] w-[160px] md:w-[280px]">
             <span id="indicator" class="shadow-[0_6px_12px_rgba(239,68,68,0.6)] absolute top-1 left-1 w-[80px] md:w-[126px] h-[40px] rounded-md bg-[#FEF2F1] transition-transform duration-300"></span>
             <button id="buy-btn" onclick="switchTab('buy')" class="relative z-10  px-[32px] py-[12px]    text-[12px] md:text-[18px] flex-1 text-center text-red-500 font-montserrat"> BUY </button>
-            <button id="taste-btn" onclick="switchTab('taste')" class="relative z-10 px-[32px] py-[12px] text-[12px] md:text-[18px] flex-1 text-center text-gray-500 font-montserrat"> TASTE </button>
+            <button id="taste-btn" onclick="switchTab('taste')" class="relative z-10 px-[32px] py-[12px] -ml-5 md:-ml-0 text-[12px] md:text-[18px] flex-1 text-center text-gray-500 font-montserrat"> TASTE </button>
         </div>
     </div>
         
