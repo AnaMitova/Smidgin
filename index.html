@@ -617,39 +617,40 @@
               <img src="img/figsour.png" class=" hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('fig-sour')"/>
               <p class="font-Baskervville md:text-2xl text-[18px] transition-transform group-hover:duration-500 delay-100 group-hover:underline cursor-pointer" onclick="openModal('fig-sour')">Fig Sour</p>  
         </div>
-        <div id="fig-sour" class="fixed inset-0 hidden flex items-center justify-center z-50">
-          <div
-            class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-20 md:w-[773px] w-[90%] h-[50%] md:h-[600px] relative flex flex-col justify-center items-center"
-            onclick="event.stopPropagation()"
-          >
-        
-            <h2 class="text-2xl font-Baskervville mb-14">Fig Sour</h2>
-        
-            <div id="main" class="flex items-center font-montserrat font-bold">
-              <div id="levo" class="flex flex-col space-y-32 -mt-24">
-                <div class="flex text-center"><p>50ml SMIDGIN <br />CLASSIC</p></div>
-                <div class="flex text-center"><p>20ml SQUEEZED <br />LEMON</p></div>
-              </div>
-        
-              <div id="sredina" class="-mt-5 w-[330px] h-[292px] overflow-hidden">
-                <img src="img/figsour.png" class="w-full h-full object-cover object-bottom" />
-              </div>
-        
-              <div id="desno" class="flex flex-col space-y-10">
-                <div class="flex text-center -mt-16"><p class="pb-7">1 FIG</p></div>
-                <br />
-                <div class="flex text-center"><p>1 EGG WHITE</p></div>
-                <br />
-                <div class="flex text-center"><p class="pl-5">10ml SHERBET</p></div>
-              </div>
-            </div>
-        
-            <p class="mt-4 text-gray-600 text-sm text-center font-montserrat">
-              Combine all ingredients in a shaker with ice. Stir, then strain into Rocks glass with ice.
-              Garnish with fresh Mediterranean fig.
-            </p>
-          </div>
-        </div>
+<div id="fig-sour" class="fixed inset-0 hidden flex items-center justify-center z-50 p-4">
+  <div
+    class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-14 w-full max-w-xl md:max-w-[773px] max-h-[90vh] h-auto relative flex flex-col justify-center items-center overflow-y-auto"
+    onclick="event.stopPropagation()"
+  >
+
+    <button class="absolute top-4 right-4 text-gray-500 text-2xl font-bold" onclick="closeModal('fig-sour')">✕</button>
+
+    <h2 class="text-3xl md:text-4xl font-Baskervville mb-8 md:mb-14 pt-4">Fig Sour</h2>
+
+    <div id="main" class="flex flex-col md:flex-row items-center font-montserrat font-bold w-full md:justify-around">
+
+      <div id="levo" class="flex flex-row md:flex-col justify-around w-full md:w-auto space-x-6 md:space-x-0 md:space-y-24 mb-6 md:mb-0">
+        <div class="text-center"><p class="text-sm md:text-base">50ml SMIDGIN <br />CLASSIC</p></div>
+        <div class="text-center"><p class="text-sm md:text-base">20ml SQUEEZED <br />LEMON</p></div>
+      </div>
+
+<div id="sredina" class="mt-4 md:-mt-5 w-full max-w-xs h-[250px] md:h-[292px] overflow-hidden flex-shrink-0">
+  <img src="img/figsour.png" class="w-full h-full object-cover object-bottom" />
+</div>
+
+      <div id="desno" class="flex flex-row md:flex-col justify-around w-full md:w-auto mt-6 md:mt-0 space-x-6 md:space-x-0 md:space-y-16">
+        <div class="text-center"><p class="text-sm md:text-base">1 FIG</p></div>
+        <div class="text-center"><p class="text-sm md:text-base">1 EGG WHITE</p></div>
+        <div class="text-center"><p class="text-sm md:text-base">10ml SHERBET</p></div>
+      </div>
+    </div>
+
+    <p class="mt-8 md:mt-12 text-gray-600 text-xs md:text-sm text-center font-montserrat px-4">
+      Combine all ingredients in a shaker with ice. Stir, then strain into Rocks glass with ice.
+      Garnish with fresh Mediterranean fig.
+    </p>
+  </div>
+</div>
         <div class="md:min-w-[350px] min-w-[160px] md:px-6 flex flex-col group justify-center items-center">
                 <img src="img/velvetperfect.png" class="h- hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('velvetperfect')"/>
                 <p class="font-Baskervville md:text-2xl text-[18px] group-hover:underline  transition-transform duration-500 delay-100">Velvet-Perfect Serve</p>  
