@@ -63,26 +63,31 @@
         </div>
     </div> 
 </div>
-<div id="ham-menu" class="fixed inset-0 bg-[#EF4135] z-50 hidden flex flex-col  pt-12 items-start justify-start space-y-0">
-    <i onclick="closeModal('ham-menu')" class="fa-solid fa-xmark text-white text-3xl absolute top-6 right-6 cursor-pointer"></i>
-    <div class="flex pl-9 pb-10 w-full justify-start" >
-      <img class="h-[42px]" src="./img/image.png"/>
+<div id="ham-menu" class="fixed inset-0 bg-[#EF4135] z-50 hidden flex flex-col  pt-24 items-start justify-start space-y-32">
+  <div class="flex flex-col"> 
+    <div class="flex items-center">
+        <p onclick="closeModal('ham-menu')" class="text-black text-5xl font-thin absolute top-24 right-12 cursor-pointer"><span class="font-medium font-montserrat text-[20px]">Close</span> x</p>
+        <div class="flex pl-9 pb-10 w-full justify-start" >
+          <img class="h-[42px]" src="./img/image.png"/>
+        </div>
     </div>
     <div class="flex flex-col w-full pl-9 space-y-3 justify-start">
-      <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">BUY ONLINE</a>
-      <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">WHO WE ARE</a>
-    <a href="./ourgin.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">OUR GIN</a>
-    <a href="./whatweoffer.html" class="text-black underline hover:text-white  font-medium font-montserrat text-2xl">WHAT WE OFFER</a>
-    <a href="findourstores.html" class="text-black underline hover:text-white font-medium font-montserrat text-2xl">FIND OUR STORES</a>
+        <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline  text-[27px]">BUY ONLINE</a>
+        <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline  text-[27px]">WHO WE ARE</a>
+        <a href="./ourgin.html" class="text-black hover:text-white  font-medium font-montserrat underline  text-[27px]">OUR GIN</a>
+        <a href="./whatweoffer.html" class="text-black underline hover:text-white  font-medium font-montserrat  text-[27px]">WHAT WE OFFER</a>
+        <a href="findourstores.html" class="text-black underline hover:text-white font-medium font-montserrat  text-[27px]">FIND OUR STORES</a>
     </div>
-<div id="slideshow" class="">
+  </div>
 
-    <div id="DiscoverOurGin" class="overflow-x-auto -mt-3">
-        <div class="flex flex-nowrap pb-12  pl-4 space-x-0">
+<div id="slideshow" class="-mt-12">
+
+    <div id="DiscoverOurGin" class="overflow-x-auto -mt-12">
+        <div class="flex flex-nowrap items-end pb-12  pl-4 space-x-0">
             
             <a href="./classic.html">
             <div class="relative group flex-col flex items-center mt-9 flex-shrink-0 w-[40%] ">
-                <img src="icons/classic.png" class="h-[234px] self-center"/>
+                <img src="icons/classic.png" class="h-[190px] self-center"/>
                 <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
                     <div class="flex flex-col w-full items-center">
                         <p class="text-7xl text-[#4D2957] font-montserrat pointer-events-auto">Smidgin</p>
@@ -151,7 +156,9 @@
              </a>
         </div>
     </div>
+    <i class="fa-solid fa-arrows-left-right flex justify-center -mt-4 text-[35px]"></i>
 </div>
+
     
 
 
