@@ -202,18 +202,24 @@
 
             // Define the stories as HTML strings (formatted to fit the space)
             const stories = {
-                cap: `<img src="sliki/logo.png" alt="Hand-Dipped Wax Seal" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
+                cap: `<div class="flex flex-col -mt-24">
+                <img src="sliki/wax.png" alt="Hand-Dipped Wax Seal" class="w-[250px] self-start mx-auto md:mx-0 "/>
                       <p class="text-red-500 md:text-4xl text-2xl">HAND-DIPPED WAX SEAL</p>
                       <p class="font-montserrat md:text-lg text-sm pt-2">Hand-applied wax seal,carefully curved for easy opening.Each seal is beautifully embossed with the iconic Macedonian lion,symbolyzing the rich history of the centuries-old heritage of the region</p>
-                      <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>`,
-                glass: `<img src="sliki/logo.png" alt="The Bottle Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
-                        <p class="text-red-500 md:text-4xl text-2xl">THE BOTTLE</p>
+                      <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>
+                    <img src="sliki/cap.png" alt="Hand-Dipped Wax Seal" class="w-[200px] self-end -mb-20 mx-auto md:mx-0 "/>
+
+                      </div>`,
+                glass: `<div class="flex-col flex">
+                <img src="sliki/mask.png" alt="The Bottle Design" class="w-2/3 -pr-20 x-auto md:mx-0 self-end"/>
+                        <p class="text-red-500 md:text-4xl text-2xl -mt-8">THE BOTTLE</p>
                         <p class="font-montserrat md:text-lg text-sm pt-2">The timeless design of our flavor bottle is inspired by the elegant and sophisticated gold mask from roman times discovered in the picturesque Ohrid region,exuding reinfimenet and class in every detail.</p>
-                        <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>`,
-                label: `<img src="sliki/logo.png" alt="Our Label Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
-                        <p class="text-red-500 md:text-4xl text-2xl">OUR LABEL</p>
+                        <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>
+                        </div>`,
+                label: `<p class="text-red-500 md:text-4xl text-2xl">OUR LABEL</p>
                         <p class="font-montserrat md:text-lg text-sm pt-2">Experience the epitome of refinement and class with our award-winning design label.Each bottle is carefully hand-applied with precision and an eye for detail,elevating any space with timeless elegance and sophistication.</p>
-                        <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>`
+                        <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>
+                        <img src="sliki/hands.png" alt="Our Label Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>`
             };
 
             // Function to change text and add hover effect
@@ -383,7 +389,7 @@
 <!-- 14 Botanicals Section -->
   
   <div class="min-h-screen flex md:flex-row flex-col items-center justify-center p-8">
-    <div class="flex  items-center gap-0 mx-auto"> 
+    <div class="flex flex-row items-center gap-0 mx-auto"> 
       
       <div class="relative w-[700px] h-[700px] flex-shrink-0 ml-[-50px]"> 
         
@@ -391,7 +397,7 @@
           <img 
             src="./icons/E176D6E5-EDA8-4F87-AB8F-CC5B4EE71848_4_5005_c.jpeg" 
             alt="SMIDGIN Logo" 
-            class="w-56 h-56 object-contain"/>
+            class="md:w-56 w-52 h-52 md:h-56 object-contain"/>
         </div>
         <div id="ingredients-container" class="absolute inset-0"></div>
       </div>
@@ -411,148 +417,117 @@
       </div>
     </div>
 
-    <script>
-      const ingredients = [
-        {
-          name: "DRY GRAPE",
-          description: "Ripe dry grape, specific sweet, fruity aroma",
-          image: "icons/icon14.png",
-          angle: 0
-        },
-        {
-          name: "LIME RIND",
-          description: "Fresh fragrant aromas, bright subtlety that ties everything together",
-          image: "icons/icon12.png",
-          angle: 25.7
-        },
-        {
-          name: "ALMOND",
-          description: "Almonds lend a delectable creaminess and rich structure in mouthfeel",
-          image: "icons/icon4.png",
-          angle: 51.4
-        },
-        {
-          name: "ORANGE PEEL",
-          description: "Sweet orange zest on the aroma and aftertaste",
-          image: "icons/icon3.png",
-          angle: 77.1
-        },
-        {
-          name: "MOUNTAIN TEA",
-          description: "Macedonian mountain tea, our stamp, soft, sweet floral aroma",
-          image: "icons/icon2.png",
-          angle: 102.8
-        },
-        {
-          name: "GRAPEFRUIT RIND",
-          description: "Bitter fresh grapefruit aroma, reaches in aftertaste",
-          image: "icons/icon7.png",
-          angle: 128.5
-        },
-        {
-          name: "LEMON RIND",
-          description: "Contribute fresh citrus note, crispness in the aroma",
-          image: "icons/icon11.png",
-          angle: 154.2
-        },
-        {
-          name: "GINGER",
-          description: "Sweet, peppery flavor with a delicate touch of warmth and freshness",
-          image: "icons/icon8.png",
-          angle: 179.9
-        },
-        {
-          name: "CORIANDER",
-          description: "Second most used botanical, spicy, nutty and slightly citrusy notes",
-          image: "icons/icon10.png",
-          angle: 205.6
-        },
-        {
-          name: "BLACK PEPPER",
-          description: "Piquant, spicy and warming",
-          image: "icons/icon6.png",
-          angle: 231.3
-        },
-        {
-          name: "WHOLE CLOVES",
-          description: "Woody spicy aroma and complexity on aroma and aftertaste",
-          image: "icons/icon13.png",
-          angle: 257
-        },
-        {
-          name: "CINNAMON BARK",
-          description: "Warm spicy notes, sweetness on taste and reaches on the aftertaste",
-          image: "icons/icon9.png",
-          angle: 282.7
-        },
-        {
-                name: "JUNIPER BERRIES",
-          description: "Juniper provides gin with its distinctive freshness, aromas as pine, resiny and hint",
-          image: "icons/icon1.png",
-          angle: 308.4
-        },
-        {
-          name: "ANGELICA ROOT",
-          description: "Warm and nutty with sweet, spicy undertones that add depth and a cozy aromatic touch.",
-          image: "icons/icon5.png",
-          angle: 334.1
-        }
-      ];
+<script>
+  const ingredients = [
+    { name: "DRY GRAPE", description: "Ripe dry grape, specific sweet, fruity aroma", image: "icons/icon14.png", angle: 0 },
+    { name: "LIME RIND", description: "Fresh fragrant aromas, bright subtlety that ties everything together", image: "icons/icon12.png", angle: 25.7 },
+    { name: "ALMOND", description: "Almonds lend a delectable creaminess and rich structure in mouthfeel", image: "icons/icon4.png", angle: 51.4 },
+    { name: "ORANGE PEEL", description: "Sweet orange zest on the aroma and aftertaste", image: "icons/icon3.png", angle: 77.1 },
+    { name: "MOUNTAIN TEA", description: "Macedonian mountain tea, our stamp, soft, sweet floral aroma", image: "icons/icon2.png", angle: 102.8 },
+    { name: "GRAPEFRUIT RIND", description: "Bitter fresh grapefruit aroma, reaches in aftertaste", image: "icons/icon7.png", angle: 128.5 },
+    { name: "LEMON RIND", description: "Contribute fresh citrus note, crispness in the aroma", image: "icons/icon11.png", angle: 154.2 },
+    { name: "GINGER", description: "Sweet, peppery flavor with a delicate touch of warmth and freshness", image: "icons/icon8.png", angle: 179.9 },
+    { name: "CORIANDER", description: "Second most used botanical, spicy, nutty and slightly citrusy notes", image: "icons/icon10.png", angle: 205.6 },
+    { name: "BLACK PEPPER", description: "Piquant, spicy and warming", image: "icons/icon6.png", angle: 231.3 },
+    { name: "WHOLE CLOVES", description: "Woody spicy aroma and complexity on aroma and aftertaste", image: "icons/icon13.png", angle: 257 },
+    { name: "CINNAMON BARK", description: "Warm spicy notes, sweetness on taste and reaches on the aftertaste", image: "icons/icon9.png", angle: 282.7 },
+    { name: "JUNIPER BERRIES", description: "Juniper provides gin with its distinctive freshness, aromas as pine, resiny and hint", image: "icons/icon1.png", angle: 308.4 },
+    { name: "ANGELICA ROOT", description: "Warm and nutty with sweet, spicy undertones that add depth and a cozy aromatic touch.", image: "icons/icon5.png", angle: 334.1 }
+  ];
 
-      const container = document.getElementById('ingredients-container');
-      const descriptionPanel = document.getElementById('description-panel');
-      const radius = 230; 
+  const container = document.getElementById('ingredients-container');
+  const descriptionPanel = document.getElementById('description-panel');
 
-      // Create ingredient icons
-      ingredients.forEach((ingredient, index) => {
-        const angleRad = (ingredient.angle * Math.PI) / 180;
-        const x = radius * Math.cos(angleRad) + 350; 
-        const y = radius * Math.sin(angleRad) + 350; 
+  function renderIngredients() {
+    container.innerHTML = ''; // Clear previous icons
 
-        const iconDiv = document.createElement('div');
-        iconDiv.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer';
-        iconDiv.style.left = x + 'px';
-        iconDiv.style.top = y + 'px';
+    const containerRect = container.getBoundingClientRect();
+    const centerX = containerRect.width / 2;
+    const centerY = containerRect.height / 2;
 
-        const img = document.createElement('img');
-        img.src = ingredient.image;
-        img.alt = ingredient.name;
-        img.className = 'ingredient-icon w-18 h-18 object-contain'; 
-        
-        iconDiv.appendChild(img);
-        container.appendChild(iconDiv);
+    // 🌐 Responsive circle size
+    let radiusMultiplier;
+    if (window.innerWidth < 640) {
+      radiusMultiplier = 0.28; // smaller/tighter circle on phones
+    } else if (window.innerWidth < 1024) {
+      radiusMultiplier = 0.32; // medium
+    } else {
+      radiusMultiplier = 0.35; // large
+    }
 
-        iconDiv.addEventListener('mouseenter', () => {
-          img.classList.add('active');
-          descriptionPanel.innerHTML = `
-            <div class="flex flex-col items-start font-montserrat text-red-500 justify-center h-full gap-6">
-              <img src="${ingredient.image}" alt="${ingredient.name}" class="w-28 h-28 text-red-500  object-contain ingredient-image-display"> 
-              <div class="text-left">
-                <h3 class="text-3xl font-bold text-red-500 mb-3">${ingredient.name}</h3>
-                <p class="text-red-500 text-lg leading-relaxed">${ingredient.description}</p>
-              </div>
+    const radius = Math.min(containerRect.width, containerRect.height) * radiusMultiplier;
+
+    // 🎯 Set icon size based on screen width
+    let iconSize;
+    if (window.innerWidth < 640) {
+      iconSize = 52; // small screens
+    } else if (window.innerWidth < 1024) {
+      iconSize = 56; // medium screens
+    } else {
+      iconSize = 72; // large screens
+    }
+
+    // 🧭 Place icons
+    ingredients.forEach((ingredient) => {
+      const angleRad = (ingredient.angle * Math.PI) / 180;
+      const x = radius * Math.cos(angleRad) + centerX;
+      const y = radius * Math.sin(angleRad) + centerY;
+
+      const iconDiv = document.createElement('div');
+      iconDiv.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer';
+      iconDiv.style.left = `${x}px`;
+      iconDiv.style.top = `${y}px`;
+
+      const img = document.createElement('img');
+      img.src = ingredient.image;
+      img.alt = ingredient.name;
+      img.className = 'ingredient-icon object-contain transition-transform duration-200 ease-in-out';
+      img.style.width = `${iconSize}px`;
+      img.style.height = `${iconSize}px`;
+
+      iconDiv.appendChild(img);
+      container.appendChild(iconDiv);
+
+
+
+      // 🧠 Hover description behavior
+      iconDiv.addEventListener('mouseenter', () => {
+        img.classList.add('scale-110');
+        descriptionPanel.innerHTML = `
+          <div class="flex flex-col items-start font-montserrat text-red-500 justify-center h-full gap-6 px-2">
+            <img src="${ingredient.image}" alt="${ingredient.name}" class="w-16 h-16 sm:w-28 sm:h-28 object-contain mb-2">
+            <div class ="flex flex-col items-start justify-start">
+<h3 class="text-xl sm:text-3xl font-bold text-red-500 mb-2">${ingredient.name}</h3> 
+          <p class="text-sm text-start sm:text-lg text-red-500 leading-relaxed">${ingredient.description}</p> 
             </div>
-          `;
-        });
-
-        iconDiv.addEventListener('mouseleave', () => {
-          img.classList.remove('active');
-          descriptionPanel.innerHTML = `
-        <div id="description-panel" class="h-full  font-Baskervville flex flex-col items-start justify-center text-center gap-6">
-          <div class="flex justify-center items-end space-x-3">
-              <p class="md:text-7xl text-[40px] text-red-500">14</p>
-              <p class="md:text-5xl text-[30px]">BOTANICALS</p>
           </div>
-          <p class="md:text-5xl -mt-4 text-[30px] text-start">FOR A DISTINCT GIN</p>
-          <div class="flex items-center pt-5 space-x-4">
-              <i class="fa-solid fa-computer-mouse text-red-500"></i>
-              <p class="font-montserrat text-xs text-red-500">Hover over the icons to learn more about the botanicals</p>
-          </div>
-        </div>
-          `;
-        });
+        `;
       });
-    </script> 
+
+      iconDiv.addEventListener('mouseleave', () => {
+        img.classList.remove('scale-110');
+        descriptionPanel.innerHTML = `
+          <div class="h-full font-Baskervville flex flex-col items-start justify-center text-center gap-6">
+            <div class="flex justify-center items-end space-x-3">
+                <p class="md:text-7xl text-[40px] text-red-500">14</p>
+                <p class="md:text-5xl text-[30px]">BOTANICALS</p>
+            </div>
+            <p class="md:text-5xl -mt-4 text-[30px] text-start">FOR A DISTINCT GIN</p>
+            <div class="flex items-center pt-5 space-x-4">
+                <i class="fa-solid fa-computer-mouse text-red-500"></i>
+                <p class="font-montserrat text-xs text-red-500">Hover over the icons to learn more about the botanicals</p>
+            </div>
+          </div>
+        `;
+      });
+    });
+  }
+
+  renderIngredients();
+  window.addEventListener('resize', renderIngredients);
+</script>
+
+
   </div>
 
 <div id="Distillery" class="md:pt-44 pt-28">
