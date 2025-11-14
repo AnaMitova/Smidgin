@@ -1,92 +1,144 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-      <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Profile Mockup</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-</head>
-<body>
-  <script>
-// Self-executing function to avoid polluting global scope
-(function() {
-    // Wait for the DOM to be fully loaded before running script
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        // --- Interactive Bottle Story ---
-        const capHotspot = document.getElementById('hotspot-cap');
-        const glassHotspot = document.getElementById('hotspot-glass');
-        const labelHotspot = document.getElementById('hotspot-label');
-        const bottomGlassHotspot = document.getElementById('hotspot-bottom-glass'); // New hotspot
-        
-        // Target the headline div
-        const storyText = document.getElementById('bottle-headline');
-        
-        // Get the bottle image itself
-        const bottleImage = document.getElementById('bottle-image');
-        
-        // Check if the storyText element exists before proceeding
-        if (storyText && bottleImage) {
-            // Store the default HTML
-            const defaultStoryHTML = storyText.innerHTML; 
-
-            // Define the stories as HTML strings (formatted to fit the space)
-            const stories = {
-                cap: `<img src="sliki/logo.png" alt="Hand-Dipped Wax Seal" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
-                      <p class="text-red-500 md:text-4xl text-2xl">HAND-DIPPED WAX SEAL</p>
-                      <p class="font-montserrat md:text-lg text-sm pt-2">Hand-applied wax seal,carefully curved for easy opening.Each seal is beautifully embossed with the iconic Macedonian lion,symbolyzing the rich history of the centuries-old heritage of the region</p>`,
-                glass: `<img src="sliki/logo.png" alt="The Bottle Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
-                        <p class="text-red-500 md:text-4xl text-2xl">THE BOTTLE</p>
-                        <p class="font-montserrat md:text-lg text-sm pt-2">The timeless design of our flavor bottle is inspired by the elegant and sophisticated gold mask from roman times discovered in the picturesque Ohrid region,exuding reinfimenet and class in every detail.</p>`,
-                label: `<img src="sliki/logo.png" alt="Our Label Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>
-                        <p class="text-red-500 md:text-4xl text-2xl">OUR LABEL</p>
-                        <p class="font-montserrat md:text-lg text-sm pt-2">Experience the epitome of refinement and class with our award-winning design label.Each bottle is carefully hand-applied with precision and an eye for detail,elevating any space with timeless elegance and sophistication.</p>`
-            };
-
-            // Function to change text and add hover effect
-            function showStory(html) {
-                // Ensure the container class is maintained while updating content
-                storyText.className = "flex md:text-5xl text-[26px] flex-col md:space-y-4 md:min-h-[300px]"; 
-                storyText.innerHTML = html;
-                bottleImage.classList.add('bottle-glow');
-            }
-
-            // Function to reset text and remove hover effect
-            function resetStory() {
-                storyText.innerHTML = defaultStoryHTML;
-                // Reapply the necessary classes for the default view
-                storyText.className = "flex md:text-5xl text-[26px] flex-col md:space-y-4 md:min-h-[300px]"; 
-                bottleImage.classList.remove('bottle-glow');
-            }
-
-            // Add event listeners for all hotspots
-            if (capHotspot) {
-                capHotspot.addEventListener('mouseenter', () => showStory(stories.cap));
-                capHotspot.addEventListener('mouseleave', () => resetStory());
-            }
-            
-            if (glassHotspot) {
-                glassHotspot.addEventListener('mouseenter', () => showStory(stories.glass));
-                glassHotspot.addEventListener('mouseleave', () => resetStory());
-            }
-
-            if (labelHotspot) {
-                labelHotspot.addEventListener('mouseenter', () => showStory(stories.label));
-                labelHotspot.addEventListener('mouseleave', () => resetStory());
-            }
-            
-            // Add listeners for the new bottom glass hotspot
-            if (bottomGlassHotspot) {
-                bottomGlassHotspot.addEventListener('mouseenter', () => showStory(stories.glass));
-                bottomGlassHotspot.addEventListener('mouseleave', () => resetStory());
-            }
-
-        } else {
-            console.error("Bottle headline ('bottle-headline') or image ('bottle-image') not found.");
+    <style>
+        /* Custom CSS to ensure image aspect ratio and cover property */
+        .post-image {
+            width: 100%;
+            padding-bottom: 100%; /* Creates a 1:1 aspect ratio container */
+            position: relative;
         }
-    });
-})();
-</script>
+        .post-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the container */
+        }
+        /* Custom background for specific posts to simulate the look */
+        .bg-red-circle {
+            background-color: #e54c3a; /* A close red tone */
+        }
+        .bg-blue-backdrop {
+            background-color: #2a618f; /* A close blue tone */
+        }
+        /* Style for the verified badge (a simple light blue circle/dot) */
+        .verified-badge {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: #3897f0; /* Instagram blue */
+            border-radius: 50%;
+            margin-left: 4px;
+            /* Simple checkmark approximation with clip-path or background image is complex for this,
+               so we use a blue dot as a minimalist representation */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex justify-center py-8">
+    <div class="max-w-4xl w-full bg-white border border-gray-200 rounded-xl shadow-lg p-6">
+
+        <header class="flex items-center justify-between mb-8">
+            <div class="flex items-center space-x-4">
+                <div class="w-20 h-20 rounded-full bg-red-500 overflow-hidden flex items-center justify-center">
+                    <span class="text-white text-2xl font-bold">SMIDG'IN</span>
+                </div>
+                <div>
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-semibold text-gray-800 mr-2">SMIDG'IN</h1>
+                        <span class="verified-badge"></span>
+                    </div>
+                    <p class="text-sm text-gray-500">smidgin.mk</p>
+                </div>
+            </div>
+
+            <div class="hidden sm:flex space-x-8 text-center">
+                <div>
+                    <p class="font-bold text-lg">271</p>
+                    <p class="text-gray-500 text-sm">posts</p>
+                </div>
+                <div>
+                    <p class="font-bold text-lg">7,371</p>
+                    <p class="text-gray-500 text-sm">followers</p>
+                </div>
+                <div>
+                    <p class="font-bold text-lg">436</p>
+                    <p class="text-gray-500 text-sm">following</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <div class="flex -space-x-2 mr-4">
+                    <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/32/3897f0/FFFFFF?text=P1" alt="Profile 1">
+                    <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/32/3897f0/FFFFFF?text=P2" alt="Profile 2">
+                </div>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg text-sm transition duration-150">
+                    Follow
+                </button>
+            </div>
+        </header>
+
+        <hr class="mb-8">
+
+        <div class="grid grid-cols-3 gap-1">
+            
+            <div class="post-image">
+                <img src="https://via.placeholder.com/600x600?text=Post+1+Placeholder" alt="Post 1">
+                <div class="absolute top-2 left-2 p-1 bg-red-500 text-white text-xs font-bold rounded-sm">SMIDG'IN</div>
+            </div>
+            
+            <div class="post-image bg-blue-backdrop flex items-center justify-center">
+                <img src="https://via.placeholder.com/600x600/2a618f/FFFFFF?text=Post+2+Placeholder" alt="Post 2">
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
+                    <p class="text-white text-sm text-center">Дистилиран со прецизност</p>
+                    <p class="text-white text-lg font-bold text-center">Создаден со визија</p>
+                </div>
+            </div>
+            
+            <div class="post-image">
+                <img src="https://via.placeholder.com/600x600?text=Post+3+Placeholder" alt="Post 3">
+            </div>
+            
+            <div class="post-image">
+                <img src="https://via.placeholder.com/600x600?text=Post+4+Placeholder" alt="Post 4">
+                <div class="absolute inset-x-0 bottom-0 bg-black bg-opacity-60 text-white p-3">
+                    <p class="text-sm font-bold">SMIDG'IN WEEKEND IN ANGELS</p>
+                    <p class="text-xs">SPECIAL PRICES | COCKTAILS | HIP HOP & RNB VIBES</p>
+                </div>
+            </div>
+
+            <div class="post-image bg-gray-900">
+                <img src="https://via.placeholder.com/600x600/374151/FFFFFF?text=Post+5+Placeholder" alt="Post 5">
+                <div class="absolute bottom-0 inset-x-0 p-3 bg-white text-center">
+                    <p class="text-lg font-bold text-red-600">SPEND MINIMUM 3000 DEN</p>
+                    <p class="text-xs text-gray-700">GET A SMALL GIFT BOX</p>
+                </div>
+            </div>
+            
+            <div class="post-image bg-red-circle flex items-center justify-center">
+                <img src="https://via.placeholder.com/600x600/e54c3a/FFFFFF?text=Post+6+Placeholder" alt="Post 6">
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
+                    <p class="text-white text-lg font-bold text-center">SMIDG'IN COCKTAIL ACADEMY</p>
+                </div>
+            </div>
+            
+            <div class="post-image">
+                <img src="https://via.placeholder.com/600x600?text=Post+7+Placeholder" alt="Post 7">
+            </div>
+            
+            <div class="post-image">
+                <img src="https://via.placeholder.com/600x600?text=Post+8+Placeholder" alt="Post 8">
+                <div class="absolute inset-x-0 bottom-0 bg-black bg-opacity-60 text-white p-2">
+                    <p class="text-sm font-bold text-center">PERFECT BITES FOR OUR GIN NIGHT</p>
+                </div>
+            </div>
+
+        </div>
+        </div>
 </body>
 </html>
