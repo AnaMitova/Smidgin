@@ -53,6 +53,7 @@
         #slideshowReviews::-webkit-scrollbar {
           display: none; 
         }
+
         
 
     </style>
@@ -86,23 +87,102 @@
       </video>
     </div>   
 </div>
-<div id="ham-menu" class="fixed inset-0 bg-[#EF4135] z-50 hidden flex flex-col items-start pt-12 justify-start space-y-6">
+<div id="ham-menu" class="fixed inset-0 bg-[#EF4135] z-50 hidden flex flex-col  pt-12 items-start justify-start space-y-0">
     <i onclick="closeModal('ham-menu')" class="fa-solid fa-xmark text-white text-3xl absolute top-6 right-6 cursor-pointer"></i>
     <div class="flex pl-9 pb-10 w-full justify-start" >
       <img class="h-[42px]" src="./img/image.png"/>
     </div>
-    <div class="flex flex-col w-full pl-9 space-y-4 justify-start">
+    <div class="flex flex-col w-full pl-9 space-y-3 justify-start">
       <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">BUY ONLINE</a>
       <a href="./whoweare.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">WHO WE ARE</a>
     <a href="./ourgin.html" class="text-black hover:text-white  font-medium font-montserrat underline text-2xl">OUR GIN</a>
     <a href="./whatweoffer.html" class="text-black underline hover:text-white  font-medium font-montserrat text-2xl">WHAT WE OFFER</a>
     <a href="findourstores.html" class="text-black underline hover:text-white font-medium font-montserrat text-2xl">FIND OUR STORES</a>
     </div>
-    
+<div id="slideshow" class="">
+
+    <div id="DiscoverOurGin" class="overflow-x-auto mt-20">
+        <div class="flex flex-nowrap pb-12  pl-4 space-x-0 items-end">
+            
+            <a href="./classic.html">
+            <div class="relative group flex-shrink-0 w-[40%] snap-start">
+                <img src="icons/classicFinal.jpeg" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex flex-col w-full items-center">
+                        <p class="text-7xl text-red-500 font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-8xl text-red-500 mr-[-150px] font-montserrat pointer-events-auto">Velvet</p>
+                    </div>
+                    <a href="./velvet.html" class="mt-8 py-3 bg-red-500 rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">CLASSIC</div>
+            </div>
+             </a>
+
+            <a href="./velvet.html">
+            <div class="relative group flex-shrink-0 w-[40%] snap-start">
+                <img src="icons/velvet.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex flex-col w-full items-center">
+                        <p class="text-7xl text-[#4D2957] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-8xl text-[#4D2957] mr-[-150px] font-Velvet pointer-events-auto">Velvet</p>
+                    </div>
+                    <a href="./velvet.html" class="mt-8 py-3 bg-[#4D2957] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">VELVET</div>
+            </div>
+             </a>
+             
+            <a href="./orient.html">
+            <div class="relative group flex-shrink-0 w-[40%] snap-start">
+                <img src="icons/orient.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex -ml-7 flex-col w-full items-center">
+                        <p class="text-7xl text-[#821A16] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-7xl text-[#821A16] mr-[-150px] font-Papyrus pointer-events-auto">Orient</p>
+                    </div>
+                    <a href="./orient.html" class="mt-8 px-5 py-3 bg-[#821A16] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">ORIENT</div>
+            </div>
+             </a>
+             
+             <a href="./light.html">
+            <div class="relative group flex-shrink-0 w-[40%] snap-start">
+                <img src="icons/light.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex -ml-7 flex-col w-full items-center">
+                        <p class="text-7xl text-[#4164AD] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-7xl text-[#4164AD] mr-[-150px] font-montserrat pointer-events-auto">LIGHT</p>
+                    </div>
+                    <a href="./light.html" class="mt-8 px-5 py-3 bg-[#4164AD] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">LIGHT</div>
+            </div>
+             </a>
+
+            <a href="./xo.html">
+            <div class="relative group  flex-shrink-0 w-[40%]  snap-start">
+                <img src="./icons/xo.png" class="w-full md:group-hover:blur-md group-hover:cursor-pointer md:group-hover:opacity-60 duration-500 delay-100"/>
+                <div class="absolute inset-0 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500 pointer-events-none group-hover:duration-500">
+                    <div class="flex flex-col w-full items-center">
+                        <p class="text-7xl text-[#A24B1E] font-montserrat pointer-events-auto">Smidgin</p>
+                        <p class="text-7xl text-[#A24B1E] mr-[-150px] font-Baskervville pointer-events-auto">XO</p>
+                    </div>
+                    <a href="./xo.html" class="mt-8 px-5 py-3 bg-[#A24B1E] rounded-xl font-montserrat text-white pointer-events-auto text-lg">Read more</a>
+                </div>
+               <div class="md:hidden mt-4 text-black text-[20px] underline font-montserrat text-center">XO</div>
+            </div>
+             </a>
+        </div>
+    </div>
+    <i class="fa-solid fa-arrows-left-right flex justify-center -mt-4 text-[30px]"></i>
 
 </div>
+    
+
+
 </div>
-</div>
+
     <br/>
     <br/>
     <br/>
@@ -140,7 +220,7 @@
 
 <div id="gin" class="bg-white font-Baskervville flex md:flex-row flex-row-reverse items-center justify-center md:items-center md:justify-start md:space-x-40 md:px-36 px-0 md:pt-52">
     
-    <div class="md:w-1/3 w-[160px] md:pl-14 relative"> <img src="img/classic.png" class=" w-[303px]" id="bottle-image"/>
+    <div class="md:w-1/3 w-[140px] md:pl-14 relative"> <img src="img/classic.png" class=" w-[303px]" id="bottle-image"/>
         
         <div id="hotspot-cap" class="hotspot absolute cursor-pointer" style="top: 0%; left: 38%; width: 24%; height: 10%; border-radius: 50% 50% 10px 10px;"></div>
         <div id="hotspot-glass" class="hotspot absolute cursor-pointer" style="top: 10%; left: 32%; width: 36%; height: 25%; border-radius: 20px 20px 0 0;"></div>
@@ -148,8 +228,8 @@
         <div id="hotspot-bottom-glass" class="hotspot absolute cursor-pointer" style="top: 85%; left: 15%; width: 70%; height: 15%; border-radius: 0 0 40% 40%;"></div>
     </div>
 
-    <div class="flex w-1/2  flex-col space-y-3">
-        <div id="bottle-headline" class="flex md:text-5xl text-[20px] flex-col md:space-y-4 md:min-h-[160px]">
+    <div id="bottle-headline" class="flex w-[56%]  flex-col space-y-3">
+        <div  class="flex md:text-5xl text-[20px] flex-col md:space-y-4 md:min-h-[160px]">
             <p>A BOTTLE BORN OF</p>
             <p><SPAN class="text-red-500">MACEDONIAN</SPAN></p>
             <p>CRAFT</p>
@@ -202,12 +282,11 @@
 
             // Define the stories as HTML strings (formatted to fit the space)
             const stories = {
-                cap: `<div class="flex flex-col -mt-24">
-                <img src="sliki/wax.png" alt="Hand-Dipped Wax Seal" class="w-[250px] self-start mx-auto md:mx-0 "/>
+                cap: `<div class="flex flex-col md:-mt-24">
+                <img src="sliki/wax.png" alt="Hand-Dipped Wax Seal" class="w-[120px] md:w-[250px] hidden md:block self-start mx-auto md:mx-0 "/>
                       <p class="text-red-500 md:text-4xl text-2xl">HAND-DIPPED WAX SEAL</p>
                       <p class="font-montserrat md:text-lg text-sm pt-2">Hand-applied wax seal,carefully curved for easy opening.Each seal is beautifully embossed with the iconic Macedonian lion,symbolyzing the rich history of the centuries-old heritage of the region</p>
-                      <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>
-                    <img src="sliki/cap.png" alt="Hand-Dipped Wax Seal" class="w-[200px] self-end -mb-20 mx-auto md:mx-0 "/>
+                    <img src="sliki/cap.png" alt="Hand-Dipped Wax Seal" class="w-[90px] md:w-[200px] self-end -mb-0 md:-mb-20 mx-auto md:mx-0 "/>
 
                       </div>`,
                 glass: `<div class="flex-col flex">
@@ -218,14 +297,13 @@
                         </div>`,
                 label: `<p class="text-red-500 md:text-4xl text-2xl">OUR LABEL</p>
                         <p class="font-montserrat md:text-lg text-sm pt-2">Experience the epitome of refinement and class with our award-winning design label.Each bottle is carefully hand-applied with precision and an eye for detail,elevating any space with timeless elegance and sophistication.</p>
-                        <p class="font-montserrat md:text-lg text-sm pt-2 md:min-h-0 min-h-[140px]"></p>
                         <img src="sliki/hands.png" alt="Our Label Design" class="w-2/3 mb-4 mx-auto md:mx-0 rounded-xl shadow-lg"/>`
             };
 
             // Function to change text and add hover effect
             function showStory(html) {
                 // Ensure the container class is maintained while updating content
-                storyText.className = "flex md:text-5xl text-[26px] flex-col md:space-y-4 md:min-h-[300px]"; 
+                storyText.className = "flex w-[56%]  flex-col space-y-3 pl-3"; 
                 storyText.innerHTML = html;
                 bottleImage.classList.add('bottle-glow');
             }
@@ -234,7 +312,7 @@
             function resetStory() {
                 storyText.innerHTML = defaultStoryHTML;
                 // Reapply the necessary classes for the default view
-                storyText.className = "flex md:text-5xl text-[26px] flex-col md:space-y-4 md:min-h-[160px]"; 
+                storyText.className = "flex w-[56%]  flex-col space-y-3 pl-3"; 
                 bottleImage.classList.remove('bottle-glow');
             }
 
@@ -534,11 +612,11 @@
     <div class="flex md:flex-row flex-col px-8 md:px-36 justify-between ">
             <div id="levo" class="md:w-1/2 font-Baskervville flex flex-col md:space-y-0 -space-y-7">
                 <div class="flex space-x-3">
-                    <p class="md:text-5xl text-[32px]">VISIT THE</p>
-                    <p class="md:text-5xl text-[32px] text-red-500">SMIDGIN</p>
+                    <p class="md:text-5xl text-[30px]">VISIT THE</p>
+                    <p class="md:text-5xl text-[30px] text-red-500">SMIDGIN</p>
                 </div>
                     <br/>
-                    <p class="md:text-5xl text-[32px]">DISTILLERY</p>
+                    <p class="md:text-5xl text-[30px]">DISTILLERY</p>
                 </div>
             <div id="desno" class="md:w-1/2 mt-5 md:mt-0 font-montserrat md:text-xl text-[16px]">
                 <p>Smidgin is distilled and bottled at a unique location in the center of Skopje, in the historic <span class="text-red-500 font-semibold">MCM building</span>, the house of the Ruben family, in Debar Maalo.</p>
