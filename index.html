@@ -208,14 +208,16 @@
         filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.8)); 
     }
     
-    /* New styles for ingredient glow */
-    .ingredient-icon {
-        transition: filter 0.2s ease-in-out;
-    }
-    .ingredient-icon.active {
-      /* Red filter on hover/active */
-      filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2000%) hue-rotate(350deg) brightness(95%) contrast(95%);
-    }
+.ingredient-icon {
+    /* Ensures the color change is smooth */
+    transition: filter 0.2s ease-in-out; 
+}
+
+/* This is the key part that changes the icon's color to red-500 */
+.ingredient-icon.active {
+  /* Red filter on hover/active */
+  filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(1500%) hue-rotate(350deg) brightness(95%) contrast(95%);
+}
 </style>
 
 <div id="gin" class="bg-white font-Baskervville flex md:flex-row flex-row-reverse items-center justify-center md:items-center md:justify-start md:space-x-40 md:px-36 px-0 md:pt-52">
@@ -570,7 +572,7 @@
 
       // 🧠 Hover description behavior
       iconDiv.addEventListener('mouseenter', () => {
-        img.classList.add('scale-110');
+        img.classList.add('active');
         descriptionPanel.innerHTML = `
           <div class="flex flex-col items-start font-montserrat text-red-500 justify-center h-full gap-6 px-2">
             <img src="${ingredient.image}" alt="${ingredient.name}" class="w-16 h-16 sm:w-28 sm:h-28 object-contain mb-2">
@@ -583,7 +585,7 @@
       });
 
       iconDiv.addEventListener('mouseleave', () => {
-        img.classList.remove('scale-110');
+        img.classList.remove('active');
         descriptionPanel.innerHTML = `
           <div class="h-full font-Baskervville flex flex-col items-start justify-center text-center gap-6">
             <div class="flex justify-center items-end space-x-3">
