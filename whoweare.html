@@ -372,13 +372,95 @@
         <div class="flex flex-col space-y-5 items-center"> 
             <h1 class="text-[25px] md:text-3xl font-semibold font-Baskervville">WE CARE FOR THE NATURE</h1>
             <img class="md:hidden pb-5 w-[70%]" src="./img/Screenshot 2025-09-16 at 12.26.47.png"/>           
-            <a class="md:hidden px-5 py-3 bg-red-500 font-montserrat shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">READ MORE</a>
+            <a onclick="openReturnSlides()" class="md:hidden hover:cursor-pointer px-5 py-3 bg-red-500 font-montserrat shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">READ MORE</a>
             <p class="font-montserrat text-[16px] md:text-[18px] md:px-0 px-7 pb-10 pt-10">Sustainability isn't just a trend for us, it's part of how we distill, bottle, and serve.<br/>• We use <span class="text-red-500 font-bold">locally sourced ingredients </span>to support our community and reduce our footprint.<br/>• We <span class="text-red-500 font-bold">reuse</span>, our <span class="text-red-500 font-bold">bottle return program</span>  helps us keep waste low and vibes high.<br/>• We pack your gin in <span class="text-red-500 font-bold">eco-friendly boxes</span>  because the planet deserves good packaging too.</p>
-            <a class=" hidden md:block px-5 py-3 bg-red-500 font-montserrat shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">READ MORE</a>
+            <a onclick="openReturnSlides()" class="hover:cursor-pointer hidden md:block px-5 py-3 bg-red-500 font-montserrat shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">READ MORE</a>
         </div>
     </div>
 
+<!-- MODAL -->
+<div id="returnModal" class="fixed inset-0 hidden z-[9999] bg-black/70 flex items-center justify-center">
 
+<div class="relative w-[88%] max-w-[620px] bg-white rounded-2xl overflow-hidden shadow-2xl">
+
+    <!-- Close -->
+    <button onclick="closeModal('returnModal')" 
+      class="absolute top-4 right-5 text-2xl font-bold z-10">
+      ✕
+    </button>
+
+    <!-- Slides -->
+    <div class="relative">
+
+      <img id="slideImage"
+           src="./slides/slide1.png"
+           class="w-full h-auto object-contain"/>
+
+      <!-- Left -->
+      <button onclick="prevSlide()"
+        class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+
+      <!-- Right -->
+      <button onclick="nextSlide()"
+        class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* base modal helpers */
+function openModal(id){
+  document.getElementById(id).classList.remove("hidden");
+}
+function closeModal(id){
+  document.getElementById(id).classList.add("hidden");
+}
+
+/* slideshow */
+const slides = [
+  "./slides/slide1.png",
+  "./slides/slide2.png",
+  "./slides/slide3.png"
+];
+
+let currentSlide = 0;
+
+function openReturnSlides(){
+  currentSlide = 0;
+  updateSlide();
+  openModal("returnModal");
+}
+
+function updateSlide(){
+  document.getElementById("slideImage").src = slides[currentSlide];
+}
+
+function nextSlide(){
+  currentSlide = (currentSlide + 1) % slides.length;
+  updateSlide();
+}
+
+function prevSlide(){
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  updateSlide();
+}
+
+/* keyboard controls */
+document.addEventListener("keydown", (e)=>{
+  const modal = document.getElementById("returnModal");
+  if (!modal.classList.contains("hidden")){
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "Escape") closeModal("returnModal");
+  }
+});
+</script>
 
 
 <!-- Footer -->
@@ -395,8 +477,17 @@
        <a href="./privacypolicy.html">Privacy Policy</a><br/>
        <a href="./termsandconditions.html">Terms and Conditions</a>
    </div>
-   <div class="w-1/3 flex justify-end">
-       <img src="./img/Screenshot 2025-09-02 at 01.06.11.png" class="w-[60%]"/>
+   <div class="w-1/3 flex  flex-col items-end space-y-7  md:pr-8">
+     <div id="socialmedia" class="flex space-x-3 ">
+        <a href="mailto:info@smidgin.mk"><img src="footer/Column (3).png" /></a>
+        <a href="https://www.facebook.com/smidgin.mk/"><img src="footer/Row (2).png" /></a>
+        <a href="https://www.instagram.com/smidgin.mk/?hl=en"><img src="footer/Row (3).png" /></a>
+        <a href="https://mk.linkedin.com/company/smidgin"><img src="footer/Row (4).png" /></a>
+     </div>
+     <div id="priznanija" class="flex justify-center space-x-4 items-center">
+        <a href="https://www.momondo.de/city-guides/discover-skopje.18146.guide.ksp"><img class="w-[80px]" src="footer/be033833fdb4fe0437189251af49834c8d63ea3a.png" /></a>
+        <a href="https://www.kayak.es/Skopje.18146.guide"><img class="w-[80px]" src="footer/86ef22e36b59f7cf1d14803514de703ab033752c.png" /></a>
+     </div>
    </div>
 </div>
 <div class="md:hidden mt-12">
@@ -414,11 +505,16 @@
         <p class="pl-7 text-gray-500 text-[14px] font-montserrat pt-2"><i class="fa-solid fa-location-dot"></i>   Boulevard Ilinden 80, Skopje, Macedonia</p>
         <p class="pl-7 text-gray-500 text-[14px] font-montserrat pt-2"><i class="fa-solid fa-phone"></i>  +389 76 405 175</p>
     </div>
-    <div>
-      <img class="w-16" src="./img/Screenshot 2025-10-31 at 00.21.54.png"/>
+    <div class="flex flex-col space-y-2">
+        <a href="https://www.momondo.de/city-guides/discover-skopje.18146.guide.ksp"><img class="w-[60px]" src="footer/be033833fdb4fe0437189251af49834c8d63ea3a.png" /></a>
+        <a href="https://www.kayak.es/Skopje.18146.guide"><img class="w-[60px]" src="footer/86ef22e36b59f7cf1d14803514de703ab033752c.png" /></a>
     </div>
+    <!-- Back to Top Arrow -->
 </div>
+
+
 </div>
+
 
 
  

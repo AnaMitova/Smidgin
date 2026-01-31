@@ -2,114 +2,115 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Spinning Book a Tour</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smidgin Slideshow Modal</title>
 
-<!-- Montserrat font -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Montserrat -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome (for arrows) -->
+<script src="https://kit.fontawesome.com/e70ea989f6.js" crossorigin="anonymous"></script>
 
 <style>
-  /* APPLY MONTSERRAT GLOBALLY */
-  * {
-    font-family: 'Montserrat', sans-serif;
-  }
-
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #fff;
-    margin: 0;
-  }
-
-  .circle-wrapper {
-    position: relative;
-    width: 300px;
-    height: 300px;
-  }
-
-  /* RED CENTER CIRCLE */
-  .center-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 180px;
-    height: 180px;
-    background: #f44336;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.3;
-    z-index: 2;
-  }
-
-  /* SPINNING TEXT */
-  svg {
-    width: 100%;
-    height: 100%;
-    animation: spin 12s linear infinite;
-  }
-
-  text {
-    font-size: 16px;
-    letter-spacing: 1px;
-    fill: #777;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+body { font-family: 'Montserrat', sans-serif; }
 </style>
+
 </head>
 
-<body>
+<body class="bg-gray-200 min-h-screen flex items-center justify-center">
 
-<div class="circle-wrapper">
+<button onclick="openReturnSlides()"
+  class="px-5 py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">
+  READ MORE
+</button>
 
-  <!-- Spinning text -->
-  <svg viewBox="0 0 300 300">
-    <defs>
-      <path
-        id="circlePath"
-        d="
-          M 150,150
-          m -120,0
-          a 120,120 0 1,1 240,0
-          a 120,120 0 1,1 -240,0
-        "
-      />
-    </defs>
+<!-- MODAL -->
+<div id="returnModal" class="fixed inset-0 hidden z-[9999] bg-black/70 flex items-center justify-center">
 
-    <text>
-      <textPath href="#circlePath">
-        BOOK A TOUR ~ BOOK A TOUR ~ BOOK A TOUR ~ BOOK A TOUR ~ BOOK A TOUR ~
-      </textPath>
-    </text>
-  </svg>
+<div class="relative w-[88%] max-w-[620px] bg-white rounded-2xl overflow-hidden shadow-2xl">
 
-  <!-- Center red circle -->
-  <div class="center-circle">
-    The distillery<br>
-    is open to the<br>
-    public
+    <!-- Close -->
+    <button onclick="closeModal('returnModal')" 
+      class="absolute top-4 right-5 text-2xl font-bold z-10">
+      ✕
+    </button>
+
+    <!-- Slides -->
+    <div class="relative">
+
+      <img id="slideImage"
+           src="./slides/slide1.png"
+           class="w-full h-auto object-contain"/>
+
+      <!-- Left -->
+      <button onclick="prevSlide()"
+        class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+
+      <!-- Right -->
+      <button onclick="nextSlide()"
+        class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+    </div>
+
   </div>
-
 </div>
+
+<script>
+/* base modal helpers */
+function openModal(id){
+  document.getElementById(id).classList.remove("hidden");
+}
+function closeModal(id){
+  document.getElementById(id).classList.add("hidden");
+}
+
+/* slideshow */
+const slides = [
+  "./slides/slide1.png",
+  "./slides/slide2.png",
+  "./slides/slide3.png"
+];
+
+let currentSlide = 0;
+
+function openReturnSlides(){
+  currentSlide = 0;
+  updateSlide();
+  openModal("returnModal");
+}
+
+function updateSlide(){
+  document.getElementById("slideImage").src = slides[currentSlide];
+}
+
+function nextSlide(){
+  currentSlide = (currentSlide + 1) % slides.length;
+  updateSlide();
+}
+
+function prevSlide(){
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  updateSlide();
+}
+
+/* keyboard controls */
+document.addEventListener("keydown", (e)=>{
+  const modal = document.getElementById("returnModal");
+  if (!modal.classList.contains("hidden")){
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "Escape") closeModal("returnModal");
+  }
+});
+</script>
 
 </body>
 </html>
