@@ -237,7 +237,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     </style>
 </head>
-<body>
+<a href="#top"
+   id="backToTop"
+   class="fixed bottom-6 right-6 z-[9999]
+          w-12 h-12 flex justify-center items-center
+          bg-white text-red-500 rounded-full
+          shadow-2xl shadow-black hover:scale-110
+          transition-all duration-300
+          opacity-0 pointer-events-none">
+  <i class="fa-solid fa-arrow-up text-xl"></i>
+</a>
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.remove("opacity-0", "pointer-events-none");
+      backToTop.classList.add("opacity-100");
+    } else {
+      backToTop.classList.add("opacity-0", "pointer-events-none");
+      backToTop.classList.remove("opacity-100");
+    }
+  });
+</script>
+
+<body id="top">
 
 
 <!-- Homepage Section -->
@@ -369,16 +393,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 
 <div id="world-btn" class="fixed inset-0 hidden flex items-center justify-center z-50 p-4">
-  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-14 w-full max-w-lg md:max-w-[945px] h-[650px] md:h-[600px] relative flex flex-col justify-start items-start overflow-y-auto">
+  <div class="bg-gray-50/60 backdrop-blur-lg rounded-2xl shadow-2xl p-6 md:p-12 w-full max-w-lg md:max-w-[945px] h-[650px] md:h-[580px] relative flex flex-col md:justify-center justify-start items-start overflow-y-auto">
     
-    <button class="absolute top-2 right-2 text-gray-500 text-2xl font-bold" onclick="closeModal('world-btn')">✕</button>
+    <button class="absolute top-7 right-7 text-black text-2xl font-bold" onclick="closeModal('world-btn')">✕</button>
     
-    <h2 class="text-2xl md:text-[32px] w-full text-left font-montserrat pb-8 md:pb-14 pt-4 md:pt-0">Select a Location</h2>
+    <h2 class="text-2xl md:text-[32px] w-full text-left font-montserrat pb-8 md:pb-24 pt-4 md:pt-0">Select a Location</h2>
     
     <div id="Continents" class="flex flex-col space-y-8 md:space-y-12 w-full">
         
-        <div id="NorthAmerica" class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 font-montserrat items-start md:items-center">
-            <p class="text-lg md:text-[20px] font-semibold flex-shrink-0 w-auto md:w-[150px]">North America</p>
+        <div id="NorthAmerica" class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-8 font-montserrat items-start md:items-center">
+            <p class="text-lg md:text-[20px] font-semibold flex-shrink-0 w-auto md:w-[170px]">North America</p>
             <div class="flex flex-wrap gap-3">
                 <div class="w-auto flex py-2 px-3 md:py-[13px] md:px-[20px] rounded-2xl border hover:border-red-500 hover:bg-red-50 duration-300 transition-colors hover:cursor-pointer border-black bg-white justify-center items-center space-x-2">
                     <img class="w-[20px] h-[15px] md:w-[24px] md:h-[18px] rounded-[4px]" src="./img/usa.png"/>
@@ -387,7 +411,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
         </div>
 
-        <div id="Europe" class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-0 font-montserrat items-start md:items-center">
+        <div id="Europe" class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-12 font-montserrat items-start md:items-center">
             <p class="text-lg md:text-[20px] font-semibold flex-shrink-0 w-auto md:w-[150px]">Europe</p>
             <div class="flex flex-col space-y-3 w-full">
                 <div class="flex flex-wrap gap-3">

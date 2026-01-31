@@ -29,8 +29,31 @@
         }
     </style>
 </head>
-<body>
-    <!-- Homepage Section -->
+<a href="#top"
+   id="backToTop"
+   class="fixed bottom-6 right-6 z-[9999]
+          w-12 h-12 flex justify-center items-center
+          bg-white text-red-500 rounded-full
+          shadow-2xl shadow-black hover:scale-110
+          transition-all duration-300
+          opacity-0 pointer-events-none">
+  <i class="fa-solid fa-arrow-up text-xl"></i>
+</a>
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.remove("opacity-0", "pointer-events-none");
+      backToTop.classList.add("opacity-100");
+    } else {
+      backToTop.classList.add("opacity-0", "pointer-events-none");
+      backToTop.classList.remove("opacity-100");
+    }
+  });
+</script>
+
+<body id="top">    <!-- Homepage Section -->
 <div id="homepage" class="font-montserrat md:px-28 pt-14  space-y-16 flex flex-col items-center">
     <div id="navbar" class="flex w-[99%] md:px-0 px-9 justify-between items-center">
         <a href="./index.html" id="logo" class="md:w-[208px] w-[180px]">

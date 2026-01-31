@@ -28,6 +28,19 @@
         #DiscoverOurGin::-webkit-scrollbar {
           display: none; 
         }
+        @keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-circle {
+  animation: spin 12s linear infinite;
+}
+
     </style>
 
     <script>
@@ -39,16 +52,40 @@
         }
 </script>
 </head>
-<body>
+<a href="#top"
+   id="backToTop"
+   class="fixed bottom-6 right-6 z-[9999]
+          w-12 h-12 flex justify-center items-center
+          bg-white text-red-500 rounded-full
+          shadow-2xl shadow-black hover:scale-110
+          transition-all duration-300
+          opacity-0 pointer-events-none">
+  <i class="fa-solid fa-arrow-up text-xl"></i>
+</a>
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.remove("opacity-0", "pointer-events-none");
+      backToTop.classList.add("opacity-100");
+    } else {
+      backToTop.classList.add("opacity-0", "pointer-events-none");
+      backToTop.classList.remove("opacity-100");
+    }
+  });
+</script>
+
+<body id="top">
 
 <div id="didyouknow" class="fixed hidden font-montserrat inset-0 flex items-center justify-center z-50">
   <div class="bg-[#EF4135] p-10 w-full h-full relative">
-    <button class="absolute top-9 md:top-16 right-11 md:right-20 text-black text-[28px] md:text-5xl font-bold" onclick="closeModal('didyouknow')">✕</button>
+    <button class="absolute top-9 md:top-16 right-11 md:right-20 text-black text-[28px] md:text-3xl font-bold" onclick="closeModal('didyouknow')">✕</button>
     <img src="./sliki/lav.png" class="absolute top-16 left-20"/>
     <!-- Title -->
-     <div class="flex flex-col justify-center items-center md:space-y-20 space-y-7 pt-28 md:pt-40">
+     <div class="flex flex-col justify-center items-center md:space-y-14 space-y-7 pt-28 md:pt-32">
         <h2 class="text-[25px] md:text-[40px] md:pl-0 pl-[250px] font-Baskervville text-white text-start w-[874px]">WHY <span class="text-black">THE NAME</span> SMIDGIN?</h2>
-        <div class="p-[32px] border border-white rounded-2xl w-[300px] md:w-[874px] md:h-[219px] flex justify-center items-center">
+        <div class="p-[32px] border border-white rounded-2xl w-[300px] md:w-[874px] md:h-[230px] flex justify-center items-center">
             <p class="font-montserrat text-[16px] md:text-[19px]">It means a <b>small amount</b>  and that’s how we craft our gin: small batches, carefully distilled. Because <b>small doesn’t mean simple.</b> Every bottle is made with precision, passion, and just a smidgin of the right stuff, enough to create something truly special.</p>
         </div>
      </div>
@@ -236,7 +273,7 @@
                 <div id="MilicaText" class="flex w-[75%] justify-between items-center">
                     <p class="text-[18px] font-montserrat pt-12"><span class="text-red-500 font-bold">Milica Pletvarska</span>, our master distiller and experienced enologist, joined the journey with her deep knowledge of wine and brandy. On a tour of distilleries in London and Edinburgh, the trio shaped their gin-making philosophy. Milica aimed to create a distinctive mouthfeel  without using additives like glycerin.</p>
                 </div>
-                <div id="HerSecret" class="space-x-14 flex justify-between pl-10 pt-20 items-center">
+                <div id="HerSecret" class="space-x-14 flex justify-between pl-28 pt-20 items-center">
                     <div>
                         <img class="w-[360px] rounded-xl " src="./img/milica.jpeg"/>
                     </div>
@@ -260,8 +297,67 @@
        <h1 class="font-Baskervville text-[28px] md:text-3xl font-semibold">THE HEART OF CRAFT</h1>
        <P class="md:w-1/2 text-[16px] md:text-[18px] pt-6 md:pt-0 font-montserrat">Smidgin is more than a gin, it's a place, a progress, and a passion. Every bottle is distilled and bottled in the iconic <span class="text-red-500 font-bold">MCM</span> building in Debar Maalo, one of Skopje's most recognizable landmarks. Originally the house of the Ruben family, this place now holds our small copper alembic still where precision, tradition, and flavor come together.</P>
     </div>
-    <a href="./whatweoffer.html"><img src="./img/Screenshot 2025-09-16 at 12.21.40.png" class="md:w-[75%] hidden md:block px-24 pt-7"/></a>
+    <div class="flex items-start justify-start pl-28 pt-14">
+        <div id="laptop" class="flex items-end">
+            <img class="w-[250.00000268337186px] h-[250.00000268337186px] -mr-16 z-50" src="img/image 17.png"/>
+            <img class="w-[424px]" src="img/image 19.png"/>
+    
+        </div> 
+    <!-- BOOK A TOUR SPINNING CIRCLE -->
+<div class="flex justify-center items-center pt-20 md:pt-4 md:-ml-24">
+  <div class="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px]">
+
+    <!-- Spinning text -->
+    <svg
+      viewBox="0 0 300 300"
+      class="absolute inset-0 w-full h-full spin-circle"
+    >
+      <defs>
+<path
+  id="circlePath"
+  d="
+    M 150,150
+    m -100,0
+    a 100,100 0 1,1 200,0
+    a 100,100 0 1,1 -200,0
+  "
+/>
+
+      </defs>
+
+      <text
+        class="font-montserrat uppercase tracking-[1.7px] fill-gray-500 text-[12px]"
+      >
+        <textPath href="#circlePath">
+          BOOK A TOUR ~ BOOK A TOUR ~ BOOK A TOUR ~ BOOK A TOUR ~ BOOK A TOUR ~ 
+        </textPath>
+      </text>
+    </svg>
+
+    <!-- Center red circle -->
+    <a
+      href="./whatweoffer.html"
+      class="absolute top-1/2 left-1/2
+             -translate-x-1/2 -translate-y-1/2
+             w-[170px] h-[170px] md:w-[190px] md:h-[190px]
+             bg-[#EF4135] rounded-full
+             flex justify-center items-center text-center
+             font-montserrat text-white text-[17px] md:text-[17px]
+             leading-tight 
+             hover:scale-105 transition-transform duration-300"
+    >
+      The distillery<br>
+      is open to the<br>
+      public
+    </a>
+
+  </div>
+</div>       
+    </div>
+
     <a href="./whatweoffer.html"><img src="./sliki/Screenshot 2025-11-07 at 02.38.39.png" class="md:w-[75%] md:hidden md:pl-0 md:pr-0 pl-12 pr-4 md:px-24 pt-7"/></a>
+
+
     <div class="flex md:flex-row flex-col md:px-32 px-7 items-center pt-10 md:space-x-4">
        <p class="text-[16px] md:text-[18px] font-montserrat">Inside, everything is done the old-fashioned way by hand, with heart. Each bottle is carefully filled, sealed with our signature red wax, and labeled one at a time by our own distillers. No conveyor belts. No shortcuts. Just a small team, steady hands, and a commitment to doing things properly, because every detail matters when you're making something this good.</p>
        <img src="./img/Screenshot 2025-09-16 at 12.24.20.png" class="mt-8 md:w-1/2 hidden md:block"/> 
