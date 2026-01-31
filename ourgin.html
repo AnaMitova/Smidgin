@@ -553,14 +553,20 @@
 
     <div class="relative w-full">
       <textarea
+        id="recipeText" 
         rows="8"
         placeholder="Write your recipe here"
         class="border border-black font-montserrat rounded-2xl p-4 md:p-8 w-full text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
       ></textarea>
+
+      <input type="file" id="recipePhoto" accept="image/*" class="hidden" onchange="previewFile()" />
+
       <img
         src="./img/uploadpic.png"
-        class="absolute bottom-4 right-4 w-[24px] h-[24px] md:w-[32px] md:h-[32px] cursor-pointer"
+        class="absolute bottom-4 right-4 w-[24px] h-[24px] md:w-[32px] md:h-[32px] cursor-pointer hover:opacity-70 transition"
+        onclick="document.getElementById('recipePhoto').click()"
       />
+      <p id="fileNameDisplay" class="absolute bottom-4 left-4 text-xs text-gray-500"></p>
     </div>
 
     <div class="flex w-full justify-end mt-8 md:mt-11 items-center space-x-5 md:space-x-7">
@@ -570,14 +576,103 @@
       >
         Cancel
       </p>
-      <a
-        class="cursor-pointer font-montserrat text-sm md:text-base px-4 md:px-5 py-2 md:py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white"
-        onclick="openModal('cheerstoyou');closeModal('writerecipe')"
-        >SUBMIT</a
+      
+      <button
+        id="submitBtn"
+        class="cursor-pointer font-montserrat text-sm md:text-base px-4 md:px-5 py-2 md:py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white hover:bg-red-600 transition"
+        onclick="submitRecipe()"
       >
+        SUBMIT
+      </button>
     </div>
   </div>
 </div>
+
+<script>
+  // 1. PASTE YOUR GOOGLE WEB APP URL HERE
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbylI2C9dzvwrYiHurlY9zIeTYKGI_3N-dYumhuecRhA-BAX90n-2PIQjaqP7jusNSnW4A/exec";
+
+  // Display file name when selected
+  function previewFile() {
+    const fileInput = document.getElementById('recipePhoto');
+    const display = document.getElementById('fileNameDisplay');
+    if (fileInput.files.length > 0) {
+      display.textContent = "Selected: " + fileInput.files[0].name;
+    }
+  }
+
+  function submitRecipe() {
+    const submitBtn = document.getElementById('submitBtn');
+    const textData = document.getElementById('recipeText').value;
+    const fileInput = document.getElementById('recipePhoto');
+    
+    // Basic validation
+    if(!textData) {
+      alert("Please write a recipe first.");
+      return;
+    }
+
+    // Change button text to indicate loading
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = "SENDING...";
+    submitBtn.disabled = true;
+
+    // Prepare the payload
+    const payload = {
+      recipe: textData,
+      image: "",
+      imageName: ""
+    };
+
+// Helper function to send data
+    const sendData = (dataObj) => {
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        // CRITICAL CHANGE: We use text/plain to avoid CORS preflight checks
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(dataObj)
+      })
+      .then(response => {
+        // Reset UI
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+        document.getElementById('recipeText').value = "";
+        document.getElementById('fileNameDisplay').textContent = "";
+        fileInput.value = ""; 
+        
+        closeModal('writerecipe');
+        openModal('cheerstoyou'); 
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+        alert("Something went wrong. Please try again.");
+      });
+    };
+
+    // Check if there is an image to process
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        payload.image = e.target.result; // Base64 string
+        payload.imageName = file.name;
+        sendData(payload);
+      };
+      
+      reader.readAsDataURL(file);
+    } else {
+      // Send text only
+      sendData(payload);
+    }
+  }
+
+  // Ensure you have these helper functions defined somewhere in your code
+  // function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+  // function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+</script>
 
 <!-- CHEERS TO YOU -->
 <div id="cheerstoyou" class="fixed inset-0 hidden flex items-center justify-center z-50">
