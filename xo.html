@@ -166,7 +166,7 @@
       <p class="italic text-[17px] md:text-[20px] text-gray-500 font-serif mb-12">
         An extraordinary barrel-aged gin — rested in Cabernet Sauvignon casks for layers of smooth oak, fruit, and warm spice.
       </p>
-      <a class="md:self-start self-center font-montserrat px-7 py-3 bg-[#A24B1E] shadow-[0_8px_16px_rgba(162,75,30,0.6)] rounded-xl text-white">BUY XO</a>
+      <a href="https://smidgin-shop.myshopify.com/" class="md:self-start self-center font-montserrat px-7 py-3 bg-[#A24B1E] shadow-[0_8px_16px_rgba(162,75,30,0.6)] rounded-xl text-white">BUY XO</a>
 
       <p class="text-[30px] mb-7 mt-12 font-Baskervville font-semibold">Aged to<span class="text-[#A24B1E]"> Impress</span></p>
       <p class="text-[18px] font-montserrat">
@@ -189,10 +189,14 @@
   </div>
 
   <!-- Next Product -->
-  <a href="./classic.html">
+  <a href="./classic.html" class="group">
     <div class="flex flex-col justify-center items-center mt-20 md:mt-44">
       <p class="text-[32px] md:text-[64px] font-montserrat">SMIDGIN <span class="font-montserrat text-red-500">CLASSIC</span></p>
-      <img src="./img/classic.png" class="md:w-[300px] md:h-[400px] w-[220px] h-[320px] object-cover object-top" />
+      <img src="./img/classic.png"       class="md:w-[300px] md:h-[400px] w-[220px] h-[320px]
+             object-cover object-top
+             transition-all duration-500 ease-out
+             group-hover:scale-110"
+    />
     </div>
   </a>
 
