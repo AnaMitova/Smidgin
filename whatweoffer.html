@@ -203,18 +203,18 @@
   // });
 </script>
 
-<div id="request" class="fixed hidden font-montserrat inset-0 flex items-center justify-center z-50 overflow-y-auto"> <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-5 md:p-10 w-full md:w-[752px] max-h-screen md:h-[700px] relative">
+<div id="request" class="fixed hidden font-montserrat inset-0 flex items-center h-[700px] justify-center z-50 overflow-y-auto"> <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-5 md:p-10 w-full md:w-[752px] max-h-screen md:h-[700px] relative">
     <button class="absolute top-4 right-4 text-gray-500 text-xl font-bold" onclick="closeModal('request')">✕</button>
 
     <h2 class="text-2xl md:text-[28px] font-bold pt-4 pl-0 md:pl-4" >SEND REQUEST</h2>
 
     <form 
     id="requestForm"
-    class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 md:pt-16"
+    class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 md:pt-16 "
 >
     <input type="hidden" id="tour" name="tour" value="Distillery">
 
-    <div class="flex flex-col gap-6 md:gap-8"> <div>
+    <div class="flex flex-col gap-1 md:gap-8"> <div>
             <label class="block text-sm font-medium mb-1">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Enter your full name" class="w-full border border-black text-[14px] rounded-md px-3 py-2 focus:ring focus:ring-gray-400" required/>
         </div>
@@ -248,31 +248,24 @@
             <label class="block text-sm font-medium mb-1">Leave a note</label>
             <textarea placeholder="Anything we should know?" id="note" name="note" class="w-full border border-black text-[14px] rounded-md px-3 py-2 h-20 md:h-28 focus:ring focus:ring-gray-400"></textarea>
         </div>
-
+<DIV class="flex justify-between">
         <label class="flex items-center gap-2 text-base">
             <input type="checkbox" name="companyVisit" id="companyVisit" class="rounded border-gray-400"/>
             This is a company visit
         </label>
-    </div>
-
-    <button type="submit" id="submitBtn" class="px-5 py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">
+    <button type="submit" id="submitBtn" class="md:hidden px-5 w-[40%] py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">
         SEND REQUEST
     </button>
+    </div>
+
+    <button type="submit" id="submitBtn" class="px-5 hidden md:block py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">
+        SEND REQUEST
+    </button>
+</DIV>
 </form>
 
 
-    <div class="flex justify-end pt-8 md:pt-12 items-center mt-6">
-      <div class="flex gap-8 md:gap-12 items-center">
-        <button
-          type="button"
-          class=" underline"
-          onclick="closeModal('request')"
-        >
-          Cancel
-        </button>
-       
-      </div>
-    </div>
+
   </div>
 </div>
 <div id="requestSent" class="fixed inset-0 hidden flex items-center justify-center z-50">
