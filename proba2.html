@@ -1,116 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smidgin Slideshow Modal</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Montserrat -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Font Awesome (for arrows) -->
-<script src="https://kit.fontawesome.com/e70ea989f6.js" crossorigin="anonymous"></script>
-
-<style>
-body { font-family: 'Montserrat', sans-serif; }
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smidgin | Age Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Removing number arrows for a cleaner look */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 </head>
+<body id="top" class="overflow-hidden"> <div id="age-gate" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-white/90 backdrop-blur-xl transition-opacity duration-700">
+        <h1 class="text-4xl md:text-5xl tracking-[0.2em] font-light text-black mb-2 uppercase text-center px-4">
+            Welcome to <span class="text-[#ff5a4e]">Smidgin</span>
+        </h1>
+        
+        <p class="text-sm font-sans text-gray-700 mb-12 text-center px-6">
+            Enter your birth year to prove you're of legal drinking age.
+        </p>
 
-<body class="bg-gray-200 min-h-screen flex items-center justify-center">
+        <div class="flex gap-4 md:gap-6">
+            <div class="flex flex-col items-center">
+                <input type="number" id="day" placeholder="DD" 
+                    oninput="autoNext(this, 'month')"
+                    class="w-16 md:w-20 text-3xl text-center bg-transparent border-b-2 border-[#ff5a4e] text-[#ff5a4e] focus:outline-none placeholder:text-[#ff5a4e]/50">
+            </div>
+            <div class="flex flex-col items-center">
+                <input type="number" id="month" placeholder="MM" 
+                    oninput="autoNext(this, 'year')"
+                    class="w-16 md:w-20 text-3xl text-center bg-transparent border-b-2 border-[#ff5a4e] text-[#ff5a4e] focus:outline-none placeholder:text-[#ff5a4e]/50">
+            </div>
+            <div class="flex flex-col items-center">
+                <input type="number" id="year" placeholder="YYYY" 
+                    oninput="checkAge()"
+                    class="w-24 md:w-32 text-3xl text-center bg-transparent border-b-2 border-[#ff5a4e] text-[#ff5a4e] focus:outline-none placeholder:text-[#ff5a4e]/50">
+            </div>
+        </div>
 
-<button onclick="openReturnSlides()"
-  class="px-5 py-3 bg-red-500 shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">
-  READ MORE
-</button>
-
-<!-- MODAL -->
-<div id="returnModal" class="fixed inset-0 hidden z-[9999] bg-black/70 flex items-center justify-center">
-
-<div class="relative w-[88%] max-w-[620px] bg-white rounded-2xl overflow-hidden shadow-2xl">
-
-    <!-- Close -->
-    <button onclick="closeModal('returnModal')" 
-      class="absolute top-4 right-5 text-2xl font-bold z-10">
-      ✕
-    </button>
-
-    <!-- Slides -->
-    <div class="relative">
-
-      <img id="slideImage"
-           src="./slides/slide1.png"
-           class="w-full h-auto object-contain"/>
-
-      <!-- Left -->
-      <button onclick="prevSlide()"
-        class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
-        <i class="fa-solid fa-arrow-left"></i>
-      </button>
-
-      <!-- Right -->
-      <button onclick="nextSlide()"
-        class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
-        <i class="fa-solid fa-arrow-right"></i>
-      </button>
-
+        <p id="error" class="hidden mt-6 text-red-600 text-xs font-sans font-bold">
+            You must be 18 or older to enter.
+        </p>
     </div>
 
-  </div>
-</div>
+    <div id="content-wrapper" class="blur-md transition-all duration-700">
+        
+        <a href="#top" id="backToTop" class="fixed bottom-6 right-6 z-[9999] w-12 h-12 flex justify-center items-center bg-white text-red-500 rounded-full shadow-2xl shadow-black hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+            <i class="fa-solid fa-arrow-up text-xl"></i>
+        </a>
 
-<script>
-/* base modal helpers */
-function openModal(id){
-  document.getElementById(id).classList.remove("hidden");
-}
-function closeModal(id){
-  document.getElementById(id).classList.add("hidden");
-}
+        <div id="homepage" class="font-montserrat md:px-28 pt-14 bg-[#FEF2F1] md:h-[650px] h-[350px] space-y-16 flex flex-col items-center">
+            <div id="navbar" class="flex w-[99%] md:px-0 px-9 justify-between items-center">
+                <a href="./index.html" id="logo" class="md:w-[208px] w-[180px]">
+                    <img src="./img/logo.png"/>
+                </a>
+                <i onclick="openModal('ham-menu')" class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars"></i>
+                <div id="navs" class="hidden md:flex space-x-11 text-base items-center text-black">
+                    <a href="./whoweare.html">WHO WE ARE</a>
+                    <a href="./ourgin.html">OUR GIN</a>
+                    <a href="./whatweoffer.html">WHAT WE OFFER</a>
+                    <a href="findourstores.html">FIND OUR STORES</a>
+                    <a href="#" class="px-3 py-3 bg-red-500 shadow-lg rounded-xl text-white">BUY ONLINE</a>
+                </div>
+            </div>
 
-/* slideshow */
-const slides = [
-  "./slides/slide1.png",
-  "./slides/slide2.png",
-  "./slides/slide3.png"
-];
+            <div id="video" class="md:w-[99%] w-[90%] -mb-7">
+              <video class="w-full rounded-3xl shadow-md shadow-neutral-500" src="./SMIDGIN VIDEO.mp4" autoplay loop muted playsinline></video>
+            </div>   
+        </div>
 
-let currentSlide = 0;
+        </div>
 
-function openReturnSlides(){
-  currentSlide = 0;
-  updateSlide();
-  openModal("returnModal");
-}
+    <script>
+        function autoNext(current, nextFieldID) {
+            if (current.value.length >= 2) {
+                document.getElementById(nextFieldID).focus();
+            }
+        }
 
-function updateSlide(){
-  document.getElementById("slideImage").src = slides[currentSlide];
-}
+        function checkAge() {
+            const d = document.getElementById('day').value;
+            const m = document.getElementById('month').value;
+            const y = document.getElementById('year').value;
 
-function nextSlide(){
-  currentSlide = (currentSlide + 1) % slides.length;
-  updateSlide();
-}
+            if (y.length === 4) {
+                const birthDate = new Date(y, m - 1, d);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
 
-function prevSlide(){
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  updateSlide();
-}
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
 
-/* keyboard controls */
-document.addEventListener("keydown", (e)=>{
-  const modal = document.getElementById("returnModal");
-  if (!modal.classList.contains("hidden")){
-    if (e.key === "ArrowRight") nextSlide();
-    if (e.key === "ArrowLeft") prevSlide();
-    if (e.key === "Escape") closeModal("returnModal");
-  }
-});
-</script>
-
+                if (age >= 18) {
+                    // Success logic
+                    const gate = document.getElementById('age-gate');
+                    const wrapper = document.getElementById('content-wrapper');
+                    
+                    gate.classList.add('opacity-0');
+                    wrapper.classList.remove('blur-md'); // Remove blur from site
+                    document.body.classList.remove('overflow-hidden'); // Enable scrolling
+                    
+                    setTimeout(() => {
+                        gate.classList.add('hidden');
+                    }, 700);
+                } else {
+                    document.getElementById('error').classList.remove('hidden');
+                }
+            }
+        }
+    </script>
 </body>
+</html>
 </html>
