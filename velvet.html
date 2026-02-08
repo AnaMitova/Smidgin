@@ -62,8 +62,30 @@
       <a href="./index.html" id="logo" class="md:w-[208px] w-[180px]">
         <img src="./img/logo.png"/>
       </a>
-      <i onclick="openModal('ham-menu')" class="fa-solid cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars"></i>
-      <div id="navs" class="hidden md:flex space-x-11 text-base items-center">
+<i 
+  id="floating-menu" 
+  onclick="openModal('ham-menu')" 
+  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars transition-transform duration-300 ease-in-out"
+></i>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const menuBtn = document.getElementById('floating-menu');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.scrollY || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop) {
+            // DOWN: Hide
+            menuBtn.classList.add('-translate-y-[210%]');
+        } else {
+            // UP: Show
+            menuBtn.classList.remove('-translate-y-[210%]');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+});
+</script>      <div id="navs" class="hidden md:flex space-x-11 text-base items-center">
         <a href="./whoweare.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">WHO WE ARE</a>
         <a href="./ourgin.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">OUR GIN</a>
         <a href="./whatweoffer.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">WHAT WE OFFER</a>
