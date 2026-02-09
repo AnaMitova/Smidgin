@@ -35,7 +35,8 @@
    class="fixed bottom-6 right-6 z-[9999]
           w-12 h-12 flex justify-center items-center
           bg-white text-red-500 rounded-full
-          shadow-2xl shadow-black hover:scale-110
+          shadow-[0_0_8px_rgba(0,0,0,0.25)]
+          hover:scale-110
           transition-all duration-300
           opacity-0 pointer-events-none">
   <i class="fa-solid fa-arrow-up text-xl"></i>
@@ -65,7 +66,12 @@
 <i 
   id="floating-menu" 
   onclick="openModal('ham-menu')" 
-  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars transition-transform duration-300 ease-in-out"
+  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden
+         w-[46px] h-[46px] text-xl text-center
+         flex justify-center items-center
+         text-white bg-red-500 rounded-full p-2
+         shadow-[0_0_8px_rgba(0,0,0,0.25)]
+         fa-bars transition-transform duration-300 ease-in-out"
 ></i>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -206,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <div class="self-start md:pl-0 pl-7 md:pt-0 pt-10">
       <a href="javascript:history.back()" class="font-montserrat"><i class="fa-solid fa-arrow-left pr-4"></i>BACK</a>
     </div>
-    <div class="self-center md:pt-0 pt-8 flex space-x-4 md:space-x-5 md:mr-20 items-center">
+    <div class="self-center md:hidden md:pt-0 pt-8 flex space-x-4 md:space-x-5 md:mr-20 items-center">
       <p class=" font-montserrat text-[34px] md:text-[50px]">SMIDGIN</p>                       
       <img class="w-[130px] h-[35px] md:w-[170px] md:h-[50px]" src="sliki/velvetFont.png"/>
     </div>
@@ -217,10 +223,14 @@ document.addEventListener("DOMContentLoaded", function() {
     <div id="bottle" class="w-1/3 md:w-1/2">
       <img class="md:h-[1100] py-5 w-full h-auto md:w-[471px]" src="./sliki/velvett.jpeg"/>
     </div>
-    <div class="md:w-1/2 md:pr-11 md:space-y-2 flex-col flex">
-      <p class="italic text-[17px] md:text-[20px] text-gray-500 font-serif mb-12">A premium colored gin distilled in Skopje — with blueberry, butterfly pea, and lavender — slow-distilled in copper stills and sweetened naturally.</p>
-      <a href="https://smidgin-shop.myshopify.com/products/smidgin-velvet-single-700ml-bottle" class="md:self-start self-center font-montserrat px-5 py-3 bg-[#4D2957] shadow-[0_6px_12px_rgba(77,41,87,0.6)] rounded-xl text-white">BUY VELVET</a>
-      <p class="text-[30px] md:pt-5 mb-7 mt-12 font-Baskervville font-semibold">Not Just a <span class="text-[#4D2957]">Pretty Color</span></p>
+    <div class="md:w-1/2 md:pr-11 md:space-y-2 flex-col flex ">   
+    <div class="self-start hidden md:flex -mt-20 pb-10  md:pt-0 pt-8  space-x-4 md:space-x-5 items-center">
+      <p class=" font-montserrat text-[34px] md:text-[50px]">SMIDGIN</p>                       
+      <img class="w-[130px] h-[35px] md:w-[170px] md:h-[50px]" src="sliki/velvetFont.png"/>
+    </div>
+      <p class="italic text-[17px] md:text-[20px] text-gray-500 font-serif md:pb-8">A premium colored gin distilled in Skopje — with blueberry, butterfly pea, and lavender — slow-distilled in copper stills and sweetened naturally.</p>
+      <a href="https://smidgin-shop.myshopify.com/products/smidgin-velvet-single-700ml-bottle" class="md:self-start   self-center font-montserrat px-5 py-3 bg-[#4D2957] shadow-[0_6px_12px_rgba(77,41,87,0.6)] rounded-xl text-white">BUY VELVET</a>
+      <p class="text-[30px] md:pt-5 mb-7 mt-12 font-Baskervville font-semibold md:pt-7">Not Just a <span class="text-[#4D2957]">Pretty Color</span></p>
       <p class="text-[18px] font-montserrat">Velvet is our smoothest gin yet, triple-distilled in small copper stills in Skopje for a soft, balanced texture. Its vibrant lavender-blue color comes from Butterfly Pea flowers, while a touch of honey in the distillation brings just enough natural sweetness. No sugar, no shortcuts — just a velvety gin with a floral twist.</p>
 
       <p class="text-[30px] mb-7 mt-12 font-Baskervville font-semibold">Flavor & Botanicals</p>

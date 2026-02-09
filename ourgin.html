@@ -79,7 +79,8 @@ function scrollSlider(id, direction) {
    class="fixed bottom-6 right-6 z-[9999]
           w-12 h-12 flex justify-center items-center
           bg-white text-red-500 rounded-full
-          shadow-2xl shadow-black hover:scale-110
+          shadow-[0_0_8px_rgba(0,0,0,0.25)]
+          hover:scale-110
           transition-all duration-300
           opacity-0 pointer-events-none">
   <i class="fa-solid fa-arrow-up text-xl"></i>
@@ -108,7 +109,12 @@ function scrollSlider(id, direction) {
 <i 
   id="floating-menu" 
   onclick="openModal('ham-menu')" 
-  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars transition-transform duration-300 ease-in-out"
+  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden
+         w-[46px] h-[46px] text-xl text-center
+         flex justify-center items-center
+         text-white bg-red-500 rounded-full p-2
+         shadow-[0_0_8px_rgba(0,0,0,0.25)]
+         fa-bars transition-transform duration-300 ease-in-out"
 ></i>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -331,12 +337,15 @@ document.addEventListener("DOMContentLoaded", function() {
             <i class="fa-solid fa-chevron-right text-red-500 text-xl"></i>
         </button>
     </div>
+        <div class="flex space-x-3 justify-end md:hidden pr-14 items-center -mt-5">
+      <p class="font-montserrat text-[14px] text-gray-700">Scroll to see more</p><i class="fa-solid text-[16px] text-gray-700 fa-arrow-right text-xl"></i>
+    </div>
 
 
 </div>
 
 <!-- Contact Booking -->
-<div class="flex flex-col items-center space-y-6 py-7 md:py-0">
+<div class="flex flex-col items-center space-y-6 py-7 md:py-0 md:pt-0 pt-8">
 <p class="md:text-[21px] px-7 text-[15px] font-montserrat text-center md:pt-16">Curious what else Smidgin has <span class="text-red-500 font-bold">in store?<br/> </span><span class="text-red-500 font-bold">Signature gins, custom sets, and more, </span> all in one place.</p>
 <a href="https://smidgin-shop.myshopify.com/" class="flex w-[220px] justify-center  py-3 text-center bg-red-500 font-montserrat shadow-[0_6px_12px_rgba(239,68,68,0.6)] rounded-xl text-white">VIEW SMIDGIN SHOP</a>
 </div>
@@ -605,7 +614,9 @@ document.addEventListener("DOMContentLoaded", function() {
   </button>
 </div>
 </div>
-
+    <div class="flex space-x-3 justify-end md:hidden pr-14 items-center -mt-5">
+      <p class="font-montserrat text-[14px] text-gray-700">Scroll to see more</p><i class="fa-solid text-[16px] text-gray-700 fa-arrow-right text-xl"></i>
+    </div>
 
 <!-- Have a cocktail idea? -->
 <div class="md:px-36 px-7">

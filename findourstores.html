@@ -242,7 +242,8 @@ document.addEventListener("DOMContentLoaded", async () => {
    class="fixed bottom-6 right-6 z-[9999]
           w-12 h-12 flex justify-center items-center
           bg-white text-red-500 rounded-full
-          shadow-2xl shadow-black hover:scale-110
+          shadow-[0_0_8px_rgba(0,0,0,0.25)]
+          hover:scale-110
           transition-all duration-300
           opacity-0 pointer-events-none">
   <i class="fa-solid fa-arrow-up text-xl"></i>
@@ -273,7 +274,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 <i 
   id="floating-menu" 
   onclick="openModal('ham-menu')" 
-  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars transition-transform duration-300 ease-in-out"
+  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden
+         w-[46px] h-[46px] text-xl text-center
+         flex justify-center items-center
+         text-white bg-red-500 rounded-full p-2
+         shadow-[0_0_8px_rgba(0,0,0,0.25)]
+         fa-bars transition-transform duration-300 ease-in-out"
 ></i>
 <script>
 document.addEventListener("DOMContentLoaded", function() {

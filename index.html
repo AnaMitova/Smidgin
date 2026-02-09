@@ -72,7 +72,8 @@
    class="fixed bottom-6 right-6 z-[9999]
           w-12 h-12 flex justify-center items-center
           bg-white text-red-500 rounded-full
-          shadow-2xl shadow-black hover:scale-110
+          shadow-[0_0_8px_rgba(0,0,0,0.25)]
+          hover:scale-110
           transition-all duration-300
           opacity-0 pointer-events-none">
   <i class="fa-solid fa-arrow-up text-xl"></i>
@@ -240,7 +241,12 @@ document.addEventListener("DOMContentLoaded", function() {
 <i 
   id="floating-menu" 
   onclick="openModal('ham-menu')" 
-  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars transition-transform duration-300 ease-in-out"
+  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden
+         w-[46px] h-[46px] text-xl text-center
+         flex justify-center items-center
+         text-white bg-red-500 rounded-full p-2
+         shadow-[0_0_8px_rgba(0,0,0,0.25)]
+         fa-bars transition-transform duration-300 ease-in-out"
 ></i>        <div id="navs" class="hidden md:flex space-x-11 text-base items-center">
             <a href="./whoweare.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">WHO WE ARE</a>
             <a href="./ourgin.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">OUR GIN</a>
@@ -638,6 +644,10 @@ document.addEventListener("DOMContentLoaded", function() {
             <i class="fa-solid fa-chevron-right text-red-500 text-xl"></i>
         </button>
     </div>
+    <div class="flex space-x-3 justify-end md:hidden pr-14 items-center -mt-5">
+      <p class="font-montserrat text-[14px] text-gray-700">Scroll to see more</p><i class="fa-solid text-[16px] text-gray-700 fa-arrow-right text-xl"></i>
+    </div>
+
 
 
 </div>
@@ -912,8 +922,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <br/>
 <br/>
 <br/>
-<div class="md:pl-36">
-    <div class="flex md:justify-between justify-center md:pr-36 items-end">
+<div class="md:pl-36 pl-9">
+    <div class="flex md:justify-between justify-start md:pr-36 items-end">
         <div class="font-Baskervville md:text-5xl text-[32px]">
             <p>LET'S MAKE</p>
             <p class="text-red-500 pl-1 md:ml-0 md:mt-0 -mt-3">COCKTAILS</p>
@@ -1173,10 +1183,13 @@ document.addEventListener("DOMContentLoaded", function() {
   </button>
 </div>
 </div>
+    <div class="flex space-x-3 justify-end md:hidden pr-14 items-center -mt-5">
+      <p class="font-montserrat text-[14px] text-gray-700">Scroll to see more</p><i class="fa-solid text-[16px] text-gray-700 fa-arrow-right text-xl"></i>
+    </div>
 
 
 <!-- Have a cocktail idea? -->
-<div class="md:px-36 px-7">
+<div class="md:px-36 px-7 pt-5 md:pt-0">
     <div class="flex justify-between items-center md:pt-32 pt-9 md:pr-36">
         <div class="font-montserrat text-[17px] md:w-[75%] pr-6 md:text-[22px] md:pl-20 ">
             <h1 class="font-semibold">Have a Cocktail Idea? We're listening.</h1>

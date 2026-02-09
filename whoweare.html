@@ -57,7 +57,8 @@
    class="fixed bottom-6 right-6 z-[9999]
           w-12 h-12 flex justify-center items-center
           bg-white text-red-500 rounded-full
-          shadow-2xl shadow-black hover:scale-110
+          shadow-[0_0_8px_rgba(0,0,0,0.25)]
+          hover:scale-110
           transition-all duration-300
           opacity-0 pointer-events-none">
   <i class="fa-solid fa-arrow-up text-xl"></i>
@@ -103,7 +104,12 @@
 <i 
   id="floating-menu" 
   onclick="openModal('ham-menu')" 
-  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars transition-transform duration-300 ease-in-out"
+  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden
+         w-[46px] h-[46px] text-xl text-center
+         flex justify-center items-center
+         text-white bg-red-500 rounded-full p-2
+         shadow-[0_0_8px_rgba(0,0,0,0.25)]
+         fa-bars transition-transform duration-300 ease-in-out"
 ></i>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -280,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <br/><br/>That’s where Milica comes in.</p> 
         </div>
         <div id="MilicaPhone" class="md:hidden flex px-7 space-x-5 items-center pt-9">
-            <img class="w-[45%] h-[230px] rounded-xl " src="./img/milica.jpeg"/>
+            <img class=" h-[230px] rounded-xl " src="./img/milica.jpeg"/>
             <div id="MilicaText" class="flex w-[75%] justify-between items-center">
                 <p class="text-[14px] font-montserrat"><span class="text-red-500 font-bold">Milica Pletvarska</span>, our master distiller and experienced enologist, joined the journey with her deep knowledge of wine and brandy. On a tour of distilleries in London and Edinburgh, the trio shaped their gin-making philosophy. Milica aimed to create a distinctive mouthfeel  without using additives like glycerin.</p>
             </div>
@@ -383,12 +389,12 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="md:hidden ">
 
   
-    <div class="flex md:flex-row flex-col items-start justify-start md:pl-20 md:pt-12 ">
+    <div class="flex md:flex-row flex-col items-start justify-start -pl-20 md:pt-12 ">
       <img class="w-[68%] md:pt-0 pt-20 ml-14" src="img/image 19.png"/>
     
       <!-- BOOK A TOUR SPINNING CIRCLE -->
       <div class="flex md:pt-56 -mt-32 md:-mt-0">
-        <div class="relative w-[240px] h-[240px] md:left-0 left-56 md:right-32">
+        <div class="relative w-[240px] h-[240px] md:left-0 left-48 md:right-32">
       
           <!-- Spinning text -->
           <svg viewBox="0 0 300 300" class="absolute inset-0 w-full h-full spin-circle">
@@ -436,7 +442,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-    <div class="flex md:flex-row flex-col md:px-32 px-7 items-center pt-10 md:space-x-4">
+    <div class="flex md:flex-row flex-col md:px-32 px-7 items-center pt-2 md:space-x-4">
        <p class="text-[16px] md:text-[18px] font-montserrat">Inside, everything is done the old-fashioned way by hand, with heart. Each bottle is carefully filled, sealed with our signature red wax, and labeled one at a time by our own distillers. No conveyor belts. No shortcuts. Just a small team, steady hands, and a commitment to doing things properly, because every detail matters when you're making something this good.</p>
        <img src="./img/Screenshot 2025-09-16 at 12.24.20.png" class="mt-8 md:w-1/2 hidden md:block"/> 
        <img src="./sliki/Screenshot 2025-11-07 at 02.42.31.png" class="mt-8 -ml-5 md:w-1/2 md:hidden"/> 
