@@ -72,8 +72,7 @@
    class="fixed bottom-6 right-6 z-[9999]
           w-12 h-12 flex justify-center items-center
           bg-white text-red-500 rounded-full
-          shadow-[0_0_8px_rgba(0,0,0,0.25)]
-          hover:scale-110
+          shadow-2xl shadow-black hover:scale-110
           transition-all duration-300
           opacity-0 pointer-events-none">
   <i class="fa-solid fa-arrow-up text-xl"></i>
@@ -211,25 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const menuBtn = document.getElementById('floating-menu');
-    let lastScrollTop = 0;
 
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.scrollY || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop) {
-            // DOWN: Hide
-            menuBtn.classList.add('-translate-y-[210%]');
-        } else {
-            // UP: Show
-            menuBtn.classList.remove('-translate-y-[210%]');
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    });
-});
-</script>
 
 </div>
     </div>
@@ -238,16 +219,8 @@ document.addEventListener("DOMContentLoaded", function() {
         <a href="./index.html" id="logo" class="md:w-[208px] w-[180px]">
             <img src="./img/logo.png"/>
         </a>
-<i 
-  id="floating-menu" 
-  onclick="openModal('ham-menu')" 
-  class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden
-         w-[46px] h-[46px] text-xl text-center
-         flex justify-center items-center
-         text-white bg-red-500 rounded-full p-2
-         shadow-[0_0_8px_rgba(0,0,0,0.25)]
-         fa-bars transition-transform duration-300 ease-in-out"
-></i>        <div id="navs" class="hidden md:flex space-x-11 text-base items-center">
+        <i onclick="openModal('ham-menu')" class="fa-solid right-10 top-12 fixed z-50 cursor-pointer md:hidden w-[46px] text-xl h-[46px] text-center flex justify-center items-center text-white bg-red-500 rounded-full p-2 fa-bars"></i>
+        <div id="navs" class="hidden md:flex space-x-11 text-base items-center">
             <a href="./whoweare.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">WHO WE ARE</a>
             <a href="./ourgin.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">OUR GIN</a>
             <a href="./whatweoffer.html" class="border-b-[1.5px] border-b-black pb-[1.7px]">WHAT WE OFFER</a>
@@ -571,7 +544,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <p class="md:text-5xl text-[32px] text-red-500">GIN</p>
     </div>
     
-    <div class="relative group/slider">
+    <div class="relative group">
         <div id="DiscoverOurGinMain" class="overflow-x-auto md:pt-16 scroll-smooth scrollbar-hide">
             <div class="flex items-end flex-nowrap py-12 md:px-24 pl-4 space-x-2 md:space-x-9">
                 
@@ -637,24 +610,22 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         </div>
 
-        <button id="btn-prev-gin-main" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/90 shadow-xl opacity-100 cursor-pointer">
+        <button id="btn-prev-gin-main" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/90 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
             <i class="fa-solid fa-chevron-left text-red-500 text-xl"></i>
         </button>
-        <button id="btn-next-gin-main" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/90 shadow-xl opacity-100 cursor-pointer">
+        <button id="btn-next-gin-main" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/90 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
             <i class="fa-solid fa-chevron-right text-red-500 text-xl"></i>
         </button>
     </div>
-    <div class="flex space-x-3 justify-end md:hidden pr-8  items-center -mt-5">
+
+    <div class="flex space-x-3 justify-end md:hidden pr-8 items-center -mt-5">
       <p class="font-montserrat text-[14px] text-gray-700">Scroll to see more</p><i class="fa-solid text-[16px] text-gray-700 fa-arrow-right text-xl"></i>
     </div>
-
-
-
 </div>
 
 <!-- 14 Botanicals Section -->
 <!-- 14 BOTANICALS  -->
-<div class="min-h-screen md:-mt-7 -mt-32 flex flex-col items-center justify-center p-4 font-sans overflow-hidden">
+<div class="min-h-screen -mt-7 flex flex-col items-center justify-center p-4 font-sans overflow-hidden">
     
     <div class="flex flex-col items-center gap-8 w-full max-w-[1600px] lg:flex-row lg:justify-center lg:items-center lg:gap-10 xl:gap-20 mx-auto">
         
@@ -864,7 +835,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <!-- 14 BOTANICALS END -->
 
-<div id="Distillery" class="md:pt-16 md:-mt-0 -mt-20">
+<div id="Distillery" class="md:pt-16 pt-16">
     <div class="flex md:flex-row flex-col px-8 md:px-36 justify-between ">
             <div id="levo" class="md:w-1/2 font-Baskervville flex flex-col md:-space-y-3 -space-y-7">
                 <div class="flex space-x-3">
@@ -922,8 +893,14 @@ document.addEventListener("DOMContentLoaded", function() {
 <br/>
 <br/>
 <br/>
-<div class="md:pl-36 pl-9">
-    <div class="flex md:justify-between justify-start md:pr-36 items-end">
+
+
+<!-- COCKTAILS -->
+
+
+
+<div class="md:pl-36">
+    <div class="flex md:justify-between justify-center md:pr-36 items-end">
         <div class="font-Baskervville md:text-5xl text-[32px]">
             <p>LET'S MAKE</p>
             <p class="text-red-500 pl-1 md:ml-0 md:mt-0 -mt-3">COCKTAILS</p>
@@ -939,42 +916,51 @@ document.addEventListener("DOMContentLoaded", function() {
     <div class="flex flex-nowrap items-end py-12 px-4 md:px-24 md:space-x-5 space-x-4">
         <!-- FIG SOUR -->
         <div class="md:min-w-[350px] min-w-[160px] md:px-6 flex flex-col group justify-center items-center">
-              <img src="img/figsour.png" class=" hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('fig-sour')"/>
-              <p class="font-Baskervville md:text-2xl text-[18px] transition-transform group-hover:duration-500 delay-100 group-hover:underline cursor-pointer" onclick="openModal('fig-sour')">Fig Sour</p>  
+              <img src="img/figsour.png" class="hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('fig-sour')"/>
+              <p class="font-Baskervville md:text-2xl text-[18px] transition-transform group-hover:duration-500 delay-100 group-hover:underline cursor-pointer" onclick="openModal('fig-sour')">Fig Sour</p>   
         </div>
-<div id="fig-sour" class="fixed inset-0 hidden flex items-center md:justify-center z-50">
-  <div
-    class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto  max-h-[90vh]  relative flex flex-col justify-center items-center"
-    onclick="event.stopPropagation()"
-  >
-    <h2 class="text-xl md:text-2xl font-Baskervville mb-8 md:mb-14 text-center">Fig Sour</h2>
 
-    <div id="main" class="flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
-      <!-- Left column -->
-      <div id="levo" class="flex flex-col space-y-12 md:space-y-32 -mt-12 md:-mt-24 text-[12px] md:text-base text-center">
-        <div><p>50ml SMIDGIN <br />CLASSIC</p></div>
-        <div><p>20ml SQUEEZED <br />LEMON</p></div>
-      </div>
+        <div id="fig-sour" class="fixed inset-0 hidden flex items-center md:justify-center z-50">
+          <div
+            class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto  max-h-[90vh]  relative flex flex-col justify-center items-center"
+            onclick="event.stopPropagation()"
+          >
+            <h2 class="text-xl md:text-2xl font-Baskervville mb-8 md:mb-14 text-center">Fig Sour</h2>
 
-      <!-- Center image -->
-      <div id="sredina" class="-mt-3 md:-mt-5 w-[180px] h-[160px] md:w-[330px] md:h-[292px] overflow-hidden mx-4 md:mx-8">
-        <img src="img/figsour.png" class="w-full h-full object-cover object-bottom" />
-      </div>
+            <div id="main" class="relative flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
+              
+              <img src="/Strelki/Strelka2.png" class="block absolute bottom-[100%] left-[25%] md:left-[18%] w-[50px] md:w-[80px] h-auto z-0" style="transform: rotate(10deg) translateY(20px);" alt="">
+              
+              <img src="/Strelki/Strelka3.png" class="block absolute top-[5%] right-[19%] w-[50px] md:w-[80px] h-auto z-0" style="transform: rotate(-10deg);" alt="">
+            
+              <img src="/Strelki/Strelka4.png" class="block absolute top-[40%] right-[20%] w-[36px] md:w-[60px] h-auto z-0" style="transform: rotate(0deg);" alt="">
+             
+              <img src="/Strelki/Strelka1.png" class="block absolute bottom-[50%] left-[20%] md:left-[13%] w-[40px] md:w-[70px] h-auto z-0" style="transform: rotate(-20deg);" alt="">
 
-      <!-- Right column -->
-      <div id="desno" class="flex flex-col space-y-5 md:space-y-10 text-[12px] md:text-base text-center">
-        <div><p class="-mt-8 md:-mt-16 pb-3 md:pb-7">1 FIG</p></div>
-        <div><p>1 EGG WHITE</p></div>
-        <div><p class="pl-2 md:pl-5">10ml SHERBET</p></div>
-      </div>
-    </div>
+              <img src="/Strelki/Strelka5.png" class="block absolute bottom-[0%] right-[13%] w-[90px] md:w-[155px] h-auto z-0" style="transform: rotate(10deg);" alt="">
+              
+              <div id="levo" class="relative z-10 flex flex-col space-y-12 md:space-y-32 -mt-12 md:-mt-24 text-[12px] md:text-base text-center">
+                <div><p>50ml SMIDGIN <br />CLASSIC</p></div>
+                <div><p>20ml SQUEEZED <br />LEMON</p></div>
+              </div>
 
-    <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2">
-      Combine all ingredients in a shaker with ice. Stir, then strain into a Rocks glass with ice.
-      Garnish with fresh Mediterranean fig.
-    </p>
-  </div>
-</div>
+              <div id="sredina" class="relative z-10 -mt-3 md:-mt-5 w-[180px] h-[160px] md:w-[330px] md:h-[292px] overflow-hidden mx-4 md:mx-8">
+                <img src="img/figsour.png" class="w-full h-full object-cover object-bottom" />
+              </div>
+
+              <div id="desno" class="relative z-10 flex flex-col space-y-5 md:space-y-10 text-[12px] md:text-base text-center">
+                <div><p class="-mt-8 md:-mt-16 pb-3 md:pb-7">1 FIG</p></div>
+                <div><p>1 EGG WHITE</p></div>
+                <div><p class="pl-2 md:pl-5">10ml SHERBET</p></div>
+              </div>
+            </div>
+
+            <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2 z-10 relative">
+              Combine all ingredients in a shaker with ice. Stir, then strain into a Rocks glass with ice.
+              Garnish with fresh Mediterranean fig.
+            </p>
+          </div>
+        </div>
 
         <script>
           // Open the modal
@@ -996,34 +982,32 @@ document.addEventListener("DOMContentLoaded", function() {
         
         <!-- VELVET PERFECT -->
         <div class="md:min-w-[350px] min-w-[160px] md:px-6 flex flex-col group justify-center items-center">
-                <img src="img/velvetperfect.png" class="h- hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('velvetperfect')"/>
-                <p class="font-Baskervville md:text-2xl text-[18px] group-hover:underline  transition-transform duration-500 delay-100">Velvet-Perfect Serve</p>  
-        </div>
+    <img src="img/velvetperfect.png" class="h- hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('velvetperfect')"/>
+    <p class="font-Baskervville md:text-2xl text-[18px] group-hover:underline transition-transform duration-500 delay-100">Velvet-Perfect Serve</p>  
+</div>
+
 <div id="velvetperfect" class="fixed inset-0 hidden flex items-center md:justify-center z-50">
-  <div
-    class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto max-h-[90vh]  relative flex flex-col justify-center items-center"
-    onclick="event.stopPropagation()"
-  >
+  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto max-h-[90vh] relative flex flex-col justify-center items-center" onclick="event.stopPropagation()">
     <h2 class="text-xl md:text-2xl font-Baskervville mb-6 md:mb-3 text-center">Velvet - Perfect Serve</h2>
 
-    <div class="flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
-      <div class="-mt-12 md:-mt-24 w-1/3 text-[12px] md:text-[18px] text-center" id="levo-velvet">
+    <div class="relative flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
+      <img src="/Strelki/Strelka1.png" class="block absolute top-[53%] md:top-[50%] left-[15%] w-[75px] md:w-[120px] h-auto z-0" style="transform: rotate(10deg);" alt="">
+      <img src="/Strelki/Strelka2.png" class=" flip-hor block absolute bottom-[40%] right-[15%] w-[93px] md:w-[150px] h-auto z-0" style="transform: rotate(-10deg); transform: scaleY(-1); transform: scaleX(-1);" alt="">
+
+      <div class="relative z-10 -mt-12 md:-mt-24 w-1/3 text-[12px] md:text-[18px] text-center" id="levo-velvet">
         <p>50ml SMIDGIN <br />VELVET</p>
       </div>
 
-      <div
-        class="w-[180px] h-[220px] md:w-[312px] md:h-[388px] -mr-6 md:-mr-12 overflow-hidden -mt-5 mx-2 md:mx-0"
-        id="sredina-velvet"
-      >
+      <div class="relative z-10 w-[180px] h-[220px] md:w-[312px] md:h-[388px] -mr-6 md:-mr-12 overflow-hidden -mt-5 mx-2 md:mx-0" id="sredina-velvet">
         <img src="img/velvetperfect.png" class="w-full h-full object-cover object-bottom" />
       </div>
 
-      <div class="w-1/2 text-[12px] md:text-[18px] text-center -mb-16 md:-mb-32" id="desno-velvet">
+      <div class="relative z-10 w-1/2 text-[12px] md:text-[18px] text-center -mb-16 md:-mb-32" id="desno-velvet">
         <p>100ml GRAPEFRUIT <br />SODA</p>
       </div>
     </div>
 
-    <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2">
+    <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2 z-10 relative">
       Pour Smidgin Velvet into a glass filled with ice and top with grapefruit soda. Gently stir and
       garnish with grapefruit slice, juniper berries and lavender.
     </p>
@@ -1050,36 +1034,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         <!-- GIN TONIC -->
-        <div class="md:min-w-[350px] min-w-[160px] md:px-6 flex flex-col group justify-center items-center">
-                <img src="img/gintonik.png" class="h- hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('S&T')"/>
-                <p class="font-Baskervville md:text-2xl text-[18px] group-hover:underline  transition-transform duration-500 delay-100">S&T</p>  
-        </div>
+  <div class="md:min-w-[350px] min-w-[160px] md:px-6 flex flex-col group justify-center items-center">
+    <img src="img/gintonik.png" class="h- hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('S&T')"/>
+    <p class="font-Baskervville md:text-2xl text-[18px] group-hover:underline transition-transform duration-500 delay-100">S&T</p>  
+</div>
+
 <div id="S&T" class="fixed inset-0 hidden flex items-center md:justify-center z-50">
-  <div
-    class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto  max-h-[90vh]  relative flex flex-col justify-center items-center"
-    onclick="event.stopPropagation()"
-  >
+  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto max-h-[90vh] relative flex flex-col justify-center items-center" onclick="event.stopPropagation()">
     <h2 class="text-xl md:text-2xl font-Baskervville mb-6 md:mb-3 text-center">S&T</h2>
 
-    <div class="flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
-      <div class="-mb-2 w-1/3 -mr-4 md:-mr-7 text-[12px] md:text-[18px] text-center space-y-10 md:space-y-20" id="levo-velvet">
+    <div class="relative flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
+      <img src="/Strelki/Strelka1.png" class="block absolute md:top-[13%] top-[2%] left-[14%] w-[50px] md:w-[110px] h-auto z-0" style="transform: rotate(15deg);" alt="">
+      <img src="/Strelki/Strelka2.png" class="block absolute bottom-[41%] left-[22%] w-[45px] md:w-[100px] h-auto z-0" style="transform: rotate(-10deg);" alt="">
+      <img src="/Strelki/Strelka3.png" class="block absolute bottom-[42%]  right-[22%] w-[50px] md:w-[110px] h-auto z-0" style="transform: rotate(10deg);" alt="">
+
+      <div class="relative z-10 -mb-2 w-1/3 -mr-4 md:-mr-7 text-[12px] md:text-[18px] text-center space-y-10 md:space-y-20">
         <div><p>50ml SMIDGIN <br />VELVET</p></div>
         <div><p>100ml TONIC WATER</p></div>
       </div>
 
-      <div
-        class="w-[180px] h-[220px] md:w-[312px] md:h-[388px] -mr-10 md:-mr-20 overflow-hidden -mt-5"
-        id="sredina-velvet"
-      >
+      <div class="relative z-10 w-[180px] h-[220px] md:w-[312px] md:h-[388px] -mr-10 md:-mr-20 overflow-hidden -mt-5">
         <img src="img/gintonik.png" class="w-full h-full object-cover object-bottom" />
       </div>
 
-      <div class="w-1/2 text-[12px] md:text-[18px] text-center -mb-16 md:-mb-32" id="desno-velvet">
+      <div class="relative z-10 w-1/2 text-[12px] md:text-[18px] text-center -mb-16 md:-mb-32">
         <p>LIME SQUEEZE</p>
       </div>
     </div>
 
-    <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2">
+    <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2 z-10 relative">
       Pour Smidgin into a glass filled with ice and top with tonic water. Gently stir and garnish with
       juniper berries, mountain tea and lime.
     </p>
@@ -1106,36 +1089,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         <!-- NEGRONI  -->
-        <div class="md:min-w-[350px] min-w-[160px] md:px-6 flex flex-col group justify-center items-center">
-                <img src="img/negroni.png" class="h- hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('negroni')"/>
-                <p class="font-Baskervville md:text-2xl text-[18px] group-hover:underline  transition-transform duration-500 delay-100">Negroni</p>  
-        </div>
+     <div class="md:min-w-[350px] min-w-[160px] md:px-6 flex flex-col group justify-center items-center">
+    <img src="img/negroni.png" class="h- hover:cursor-pointer transition-transform hover:scale-105 duration-500 delay-100" onclick="openModal('negroni')"/>
+    <p class="font-Baskervville md:text-2xl text-[18px] group-hover:underline transition-transform duration-500 delay-100">Negroni</p>  
+</div>
+
 <div id="negroni" class="fixed inset-0 hidden flex items-center md:justify-center z-50">
-  <div
-    class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto  max-h-[90vh] relative flex flex-col justify-center items-center"
-    onclick="event.stopPropagation()"
-  >
+  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-20 md:w-[773px] w-[95%] h-auto max-h-[90vh] relative flex flex-col justify-center items-center" onclick="event.stopPropagation()">
     <h2 class="text-xl md:text-2xl font-Baskervville mb-10 md:mb-20 text-center">Negroni</h2>
 
-    <div class="flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
-      <div class="mb-20 md:mb-40 -mr-4 md:-mr-7 text-[12px] md:text-[18px] text-center space-y-10 md:space-y-20" id="levo-velvet">
+    <div class="relative flex items-center justify-center font-montserrat font-bold scale-90 md:scale-100">
+      <img src="/Strelki/Strelka1.png" class="block absolute top-[42%] left-[15%] w-[50px] md:w-[100px] h-auto z-0" style="transform: rotate(20deg);" alt="">
+      <img src="/Strelki/Strelka2.png" class="block absolute top-[-18%] right-[1%] w-[60px] md:w-[120px] h-auto z-0" style="transform: rotate(-10deg) scaleX(-1) scaleY(-1);" alt="">
+      <img src="/Strelki/Strelka3.png" class="block absolute bottom-[55%] right-[15%] w-[45px] md:w-[80px] h-auto z-0" style="transform: rotate(5deg); " alt="">
+
+      <div class="relative z-10 mb-20 md:mb-40 -mr-4 md:-mr-7 text-[12px] md:text-[18px] text-center space-y-10 md:space-y-20">
         <p>50ml SMIDGIN <br />CLASSIC</p>
       </div>
 
-      <div
-        class="w-[200px] h-[190px] md:w-[362px] md:h-[350px] -mt-24 md:-mt-44 -mr-4 md:-mr-10 overflow-hidden"
-        id="sredina-velvet"
-      >
+      <div class="relative z-10 w-[200px] h-[190px] md:w-[362px] md:h-[350px] -mt-24 md:-mt-44 -mr-4 md:-mr-10 overflow-hidden">
         <img src="img/negroni.png" class="w-full h-full object-cover" />
       </div>
 
-      <div class="flex flex-col text-[12px] md:text-[18px] text-center" id="desno-velvet">
-        <div><p class="-mt-16 md:-mt-32 md:-mr-16">25ml CAMPARI</p></div>
+      <div class="relative z-10 flex flex-col text-[12px] md:text-[18px] text-center">
+        <div><p class="-mt-20 md:-mt-44 md:-mr-16">25ml CAMPARI</p></div>
         <div><p>25ml SWEET <br />VERMOUTH</p></div>
       </div>
     </div>
 
-    <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2">
+    <p class="mt-4 text-gray-600 text-xs md:text-sm text-center font-montserrat leading-snug md:leading-relaxed px-2 z-10 relative">
       Combine all ingredients in a shaker with ice. Stir, then strain into Rocks glass with ice.
       Garnish with Orange Twist.
     </p>
@@ -1167,7 +1149,7 @@ document.addEventListener("DOMContentLoaded", function() {
            hidden md:flex items-center justify-center
            w-12 h-12 rounded-full bg-white/70
            hover:bg-white shadow-lg transition
-           opacity-100">
+           opacity-0 group-hover:opacity-100">
     <i class="fa-solid fa-chevron-left text-red-500 text-xl"></i>
   </button>
 
@@ -1178,7 +1160,7 @@ document.addEventListener("DOMContentLoaded", function() {
            hidden md:flex items-center justify-center
            w-12 h-12 rounded-full bg-white/70
            hover:bg-white shadow-lg transition
-           opacity-100">
+           opacity-0 group-hover:opacity-100">
     <i class="fa-solid fa-chevron-right text-red-500 text-xl"></i>
   </button>
 </div>
@@ -1189,7 +1171,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <!-- Have a cocktail idea? -->
-<div class="md:px-36 px-7 pt-5 md:pt-0">
+<div class="md:px-36 px-7">
     <div class="flex justify-between items-center md:pt-32 pt-9 md:pr-36">
         <div class="font-montserrat text-[17px] md:w-[75%] pr-6 md:text-[22px] md:pl-20 ">
             <h1 class="font-semibold">Have a Cocktail Idea? We're listening.</h1>
